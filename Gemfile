@@ -76,3 +76,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+
+# Mis gemas
+
+gem "cloudinary"
