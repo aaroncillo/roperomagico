@@ -1,11 +1,12 @@
-<h1>Index de Companies</h1>
-<%= turbo_frame_tag "remote_modal", target: "_top" %>
+<div class="container">
+  <h1 class="text-blue-400">Index de Companies</h1>
+  <ul>
+  <% @companies.each do |c| %>
+    <li><%= c.name_company %></li>
+  <% end %>
+  </ul>
 
-<ul>
-<% @companies.each do |c| %>
-  <li><%= c.name_company %></li>
-<% end %>
-</ul>
-
-<%= link_to "New Company", new_company_path, class: "btn btn-primary", data: { turbo_frame: "remote_modal" }%>
-<%= link_to "Volver", "/" %>
+  <%= link_to "New Company", new_company_path, class: "btn btn-primary", data: { turbo_frame: 'modal' } %>
+  <%= link_to "Volver", "/" %>
+</div>
+<%= turbo_frame_tag "modal" %>

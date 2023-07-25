@@ -1,5 +1,4 @@
 class CompaniesController < ApplicationController
-
   def index
     @companies = Company.all
   end
@@ -14,7 +13,7 @@ class CompaniesController < ApplicationController
     if @company.save
       redirect_to companies_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

@@ -1,7 +1,5 @@
-<div class="container">
-  <h1>Formulario</h1>
-  <%= simple_form_for @company do |f| %>
-    <%= f.input :name_company %>
-    <%= f.button :submit %>
-  <% end %>
-</div>
+<h1>Nueva Empresa</h1>
+<%= simple_form_for @company do |f| %>
+  <%= f.input :name_company %>
+  <%= f.submit 'Create Company', class: "btn btn-success" %>
+<% end %>

@@ -81,3 +81,5 @@ end
 # Mis gemas
 
 gem "cloudinary"
+
+gem "tailwindcss-rails", "~> 2.0"
