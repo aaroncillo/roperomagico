@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :companies, only: [:index, :new, :create]
+
+  resources :companies, only: [:show]
 end

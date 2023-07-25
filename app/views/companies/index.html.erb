@@ -2,7 +2,9 @@
   <h1 class="text-blue-400">Index de Companies</h1>
   <ul>
   <% @companies.each do |c| %>
-    <li><%= c.name_company %></li>
+    <li>
+      <%= link_to c.name_company, company_path(c) %>
+    </li>
   <% end %>
   </ul>
 
@@ -10,3 +12,27 @@
   <%= link_to "Volver", "/" %>
 </div>
 <%= turbo_frame_tag "modal" %>
+
+<div class="container">
+  <div class="data-table">
+    <table class="table table-striped table-bordered" id="example">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="filterable">Company</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @companies.each do |c| %>
+        <tr>
+          <td><%= link_to c.name_company, company_path(c), class:"btn btn-success" %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script>
+  new DataTable('#example');
+</script>

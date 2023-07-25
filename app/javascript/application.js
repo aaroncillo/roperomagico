@@ -2,3 +2,6 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "bootstrap"
+
+import {Tabulator} from 'tabulator-tables';
+window.Tabulator = Tabulator;
