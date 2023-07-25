@@ -1,22 +1,14 @@
+<%= turbo_frame_tag "modal" %>
 <div class="container">
   <h1 class="text-blue-400">Index de Companies</h1>
-  <ul>
-  <% @companies.each do |c| %>
-    <li>
-      <%= link_to c.name_company, company_path(c) %>
-    </li>
-  <% end %>
-  </ul>
 
-  <%= link_to "New Company", new_company_path, class: "btn btn-primary", data: { turbo_frame: 'modal' } %>
-  <%= link_to "Volver", "/" %>
 </div>
-<%= turbo_frame_tag "modal" %>
 
 <div class="container">
   <div class="data-table">
-    <table class="table table-striped table-bordered" id="example">
+    <table id="example" class="table table-striped">
       <thead class="thead-dark">
+        <%= link_to "New Company", new_company_path, class: "btn btn-primary", data: { turbo_frame: 'modal' } %>
         <tr>
           <th scope="col" class="filterable">Company</th>
         </tr>
@@ -24,7 +16,7 @@
       <tbody>
         <% @companies.each do |c| %>
         <tr>
-          <td><%= link_to c.name_company, company_path(c), class:"btn btn-success" %></td>
+          <td><%=c.name_company%></td>
         </tr>
         <% end %>
       </tbody>
@@ -32,7 +24,20 @@
   </div>
 </div>
 
-
+<%= link_to "Volver", "/" %>
 <script>
-  new DataTable('#example');
+$(document).ready(function() {
+  // Verificar si el elemento ya existe antes de agregarlo
+  if ($('#example_wrapper').length === 0) {
+    var table = $('#example').DataTable({
+      "order": [[0, "asc"]],
+      "pagingType": "full_numbers",
+      "pageLength": 5,
+      "lengthMenu": [5, 10, 25, 50]
+    });
+    $("#searchBtn").on("click", function() {
+      table.draw();
+    });
+  }
+});
 </script>
