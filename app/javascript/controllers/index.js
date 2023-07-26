@@ -4,8 +4,14 @@
 
 import { application } from "./application"
 
+import DaterangepickerController from "./daterangepicker_controller"
+application.register("daterangepicker", DaterangepickerController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ShowController from "./show_controller"
+application.register("show", ShowController)
 
 import TurboModalController from "./turbo_modal_controller"
 application.register("turbo-modal", TurboModalController)

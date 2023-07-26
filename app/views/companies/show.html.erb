@@ -4,7 +4,7 @@
 
 </div>
 
-<div class="container">
+<div class="container" data-controller="show">
   <div class="data-table">
     <table id="example" class="table table-striped">
       <thead class="thead-dark">
@@ -35,21 +35,42 @@
       </tbody>
     </table>
   </div>
+
+
+  <%# Datepicker %>
+
+  <input type="text" data-controller="daterangepicker" size="24" style="text-align:center">
+  <%= form_with url: company_path, method: :get do |form| %>
+    <%= form.text_field :start_date_between, value: params[:start_date_between], data: {controller: "daterangepicker"} %>
+    <%= form.submit "search" %>
+  <% end %>
+
+  <%# TARJETAS DE VENTAS DEL MES, ARRIENDOS DEL MES, GARANTIAS PENDIENTES. GANANCIAS => ARRIENDO+VENTAS. %>
+
+  <div class="cards mt-3">
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+      <h1>Ventas:</h1>
+      <%= @valor_ventas %>
+    </div>
+
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
+      <h1>Arriendos:</h1>
+      <%= @valor_arriendos %>
+    </div>
+
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/dinner.jpg)">
+      <h1>Garantias:</h1>
+      <%= @valor_garantias %>
+    </div>
+
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/dinner.jpg)">
+      <h1>Ganancias:</h1>
+      <%= @ganancia %>
+    </div>
+  </div>
+
+
+
+
   <%= link_to "Volver", companies_path, class:"btn btn-warning mt-2" %>
 </div>
-<script>
-$(document).ready(function() {
-  // Verificar si el elemento ya existe antes de agregarlo
-  if ($('#example_wrapper').length === 0) {
-    var table = $('#example').DataTable({
-      "order": [[0, "asc"]],
-      "pagingType": "full_numbers",
-      "pageLength": 5,
-      "lengthMenu": [5, 10, 25, 50]
-    });
-    $("#searchBtn").on("click", function() {
-      table.draw();
-    });
-  }
-});
-</script>

@@ -27,6 +27,7 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
     @product = Product.new
     @products = Product.where(client_id: @client.id)
+
   end
 
   def edit

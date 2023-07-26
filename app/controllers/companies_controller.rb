@@ -24,7 +24,44 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     @client = Client.new
-    @clients = Client.where(company_id: @company.id)
+    @clients = Client.where(company_id: @company.id).includes(:products) # Cargar los productos asociados a los clientes de forma eficiente.
+
+    # DatePicker
+
+    @valor_ventas = 0
+    @valor_arriendos = 0
+    @valor_garantias = 0
+    @ganancia = 0
+
+    if params[:start_date_between]
+      starts, ends = params[:start_date_between].split(" - ")
+      starts_for_select = Date.strptime(starts, "%m/%d/%Y")
+      ends_for_select = Date.strptime(ends, "%m/%d/%Y")
+
+      @clients.each do |client|
+        client.products.where(init_date: starts_for_select..ends_for_select).each do |product|
+          if product.estado == "VENTA"
+            @valor_ventas += product.valor
+          elsif product.estado == "ARRIENDO"
+            @valor_arriendos += product.valor
+          end
+          @valor_garantias += product.garantia
+          @ganancia = @valor_ventas + @valor_arriendos
+        end
+      end
+    else
+      @clients.each do |client|
+        client.products.each do |product|
+          if product.estado == "VENTA"
+            @valor_ventas += product.valor
+          elsif product.estado == "ARRIENDO"
+            @valor_arriendos += product.valor
+          end
+          @valor_garantias += product.garantia
+          @ganancia = @valor_ventas + @valor_arriendos
+        end
+      end
+    end
   end
 
   def edit
