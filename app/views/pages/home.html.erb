@@ -1,3 +1,30 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<%= link_to "Company", companies_path %>
+<div class="container d-flex flex-column vh-100 justify-content-center">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>¡Bienvenido a la plataforma de empleo!</h1>
+      <p class="lead">Encuentra el trabajo que buscas o publica tu oferta de empleo.</p>
+      <%= link_to "Company", companies_path, class: "btn btn-dark btn-grande" %>
+    </div>
+    <div class="col-md-4">
+      <div class="data-table">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://w0.peakpx.com/wallpaper/163/338/HD-wallpaper-top-full-nature-full-for-pc-deskto-fondos-de-pantalla-naturaleza-hermosos-fondos-de-pantalla-fondo-de-pantalla-tropical-1600x900-nature.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="https://p4.wallpaperbetter.com/wallpaper/362/276/920/nature-4k-pc-full-hd-wallpaper-preview.jpg" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+  </div>
+</div>

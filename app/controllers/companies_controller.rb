@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[show edit update destroy]
   before_action :set_company_user, only: %i[show index edit new]
-  before_action :client_params, only: %i[ create ]
+  before_action :company_params, only: %i[ create ]
 
   def index
     @companies = Company.all

@@ -23,4 +23,8 @@
 #
 class Product < ApplicationRecord
   belongs_to :client
+
+  #Validaciones
+
+  validates :disfraz, :garantia, :valor, :agregado, :init_date, :end_date, presence: true
 end

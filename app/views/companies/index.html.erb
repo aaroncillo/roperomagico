@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "modal" %>
 <div class="container">
-  <h1 class="text-blue-400">Index de Companies</h1>
+  <h1 class="text-blue-400 text-center">Companies</h1>
 
 </div>
 
@@ -31,9 +31,9 @@
       </tbody>
     </table>
   </div>
+  <%= link_to "Volver", "/", class:"btn btn-warning mt-2" %>
 </div>
 
-<%= link_to "Volver", "/" %>
 <script>
 $(document).ready(function() {
   // Verificar si el elemento ya existe antes de agregarlo

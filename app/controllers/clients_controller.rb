@@ -3,7 +3,6 @@ class ClientsController < ApplicationController
   before_action :client_params, only: %i[ create ]
   before_action :set_client_user, only: %i[show index edit new]
 
-
   def index
     @clients = Client.all
   end
@@ -25,6 +24,9 @@ class ClientsController < ApplicationController
   end
 
   def show
+    @client = Client.find(params[:id])
+    @product = Product.new
+    @products = Product.where(client_id: @client.id)
   end
 
   def edit
@@ -33,9 +35,9 @@ class ClientsController < ApplicationController
   def update
     if @client.update(client_params)
       redirect_to company_path(@client.company), notice: 'Client was successfully updated.'
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

@@ -1,0 +1,65 @@
+<%= turbo_frame_tag "modal" %>
+<div class="container">
+  <h1 class="text-blue-400 text-center">Movimientos de <%= @client.name %></h1>
+
+</div>
+
+<div class="container">
+  <div class="data-table">
+    <table id="example" class="table table-striped">
+      <thead class="thead-dark">
+        <%= link_to "New Product", new_client_product_path(@client), class: "btn btn-primary", data: { turbo_frame: 'modal' } %>
+        <tr>
+          <th scope="col" class="filterable">Cliente</th>
+          <th scope="col">Disfraz</th>
+          <th scope="col">Agregado</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Garantia</th>
+          <th scope="col">Fecha Inicio</th>
+          <th scope="col">Fecha Final</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |p| %>
+        <tr>
+
+          <td><%= p.client.name %></td>
+          <td><%= p.disfraz %></td>
+          <td><%= p.agregado %></td>
+          <td><%= p.valor %></td>
+          <td><%= p.garantia %></td>
+          <td><%= p.init_date %></td>
+          <td><%= p.end_date %></td>
+          <td>
+            <%= link_to product_path(p), class:"btn btn-danger", data:{turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+            <%= link_to edit_product_path(p), class:"btn btn-primary", data: { turbo_frame: 'modal' } do %>
+              <i class="fa-solid fa-pen-to-square"></i>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= link_to "Volver", company_path(@client.company), class:"btn btn-warning mt-2" %>
+</div>
+
+<script>
+$(document).ready(function() {
+  // Verificar si el elemento ya existe antes de agregarlo
+  if ($('#example_wrapper').length === 0) {
+    var table = $('#example').DataTable({
+      "order": [[0, "asc"]],
+      "pagingType": "full_numbers",
+      "pageLength": 5,
+      "lengthMenu": [5, 10, 25, 50]
+    });
+    $("#searchBtn").on("click", function() {
+      table.draw();
+    });
+  }
+});
+</script>
