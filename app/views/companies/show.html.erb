@@ -38,12 +38,16 @@
 
 
   <%# Datepicker %>
+  <div class="data-table mt-3">
+    <%= form_with url: company_path, method: :get do |form| %>
+      <div class="d-flex flex-column mt-3 align-items-center">
+        <h2>Seleccionar fecha</h2>
+        <%= form.text_field :start_date_between, value: params[:start_date_between], data: { controller: "daterangepicker" } %>
+        <%= form.submit "search", class: "btn btn-primary mt-2" %>
+      </div>
+    <% end %>
+  </div>
 
-  <input type="text" data-controller="daterangepicker" size="24" style="text-align:center">
-  <%= form_with url: company_path, method: :get do |form| %>
-    <%= form.text_field :start_date_between, value: params[:start_date_between], data: {controller: "daterangepicker"} %>
-    <%= form.submit "search" %>
-  <% end %>
 
   <%# TARJETAS DE VENTAS DEL MES, ARRIENDOS DEL MES, GARANTIAS PENDIENTES. GANANCIAS => ARRIENDO+VENTAS. %>
 
