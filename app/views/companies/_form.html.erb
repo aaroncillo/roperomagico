@@ -1,5 +1,7 @@
 <h1>Nueva Empresa</h1>
-<%= simple_form_for @company do |f| %>
-  <%= f.input :name_company %>
-  <%= f.submit 'Create Company', class: "btn btn-success" %>
-<% end %>
+<div class="text-center">
+  <%= simple_form_for @company do |f| %>
+    <%= f.input :name_company, autofocus: true  %>
+    <%= f.submit class: "btn btn-success" %>
+  <% end %>
+</div>

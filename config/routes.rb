@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 
   resources :companies, only: [:index, :new, :create]
 
-  resources :companies, only: [:show]
+  resources :companies, except: [:index, :new, :create]
 end
