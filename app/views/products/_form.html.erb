@@ -11,10 +11,11 @@
         <%= f.input :garantia, label: "Garantía" %>
         <%= f.input :init_date, label: "Fecha de inicio", order: [:day, :month, :year], html5: true %>
         <%= f.input :end_date, label: "Fecha de fin", order: [:day, :month, :year], html5: true %>
+        <%= f.select :estado, Product::ESTADO, include_blank: true %>
       </div>
     </div>
     <div class="text-center">
-      <%= f.submit class: "btn btn-success mb-2" %>
+      <%= f.submit class: "btn btn-success mb-2 mt-2" %>
     </div>
   <% end %>
 </div>

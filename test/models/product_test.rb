@@ -6,6 +6,7 @@
 #  agregado   :text
 #  disfraz    :string
 #  end_date   :date
+#  estado     :string
 #  garantia   :integer
 #  init_date  :date
 #  valor      :integer
