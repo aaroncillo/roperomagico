@@ -9,6 +9,6 @@ Rails.application.routes.draw do
       resources :products, only: [:index, :new, :create]
     end
   end
-
+  resources :clients, except: [:index, :new, :create]
   resources :companies, except: [:index, :new, :create]
 end

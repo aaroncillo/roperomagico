@@ -11,7 +11,7 @@
         <%= link_to "New Client", new_company_client_path(@company), class: "btn btn-primary", data: { turbo_frame: 'modal' } %>
         <tr>
           <th scope="col" class="filterable">Cliente</th>
-          <th scope="col">Disfraz</th>
+          <th scope="col">Dirección</th>
           <th scope="col">Phone</th>
           <th scope="col">Action</th>
         </tr>
@@ -19,7 +19,7 @@
       <tbody>
         <% @clients.each do |c| %>
         <tr>
-          <td><%= c.name %></td>
+          <td><%= link_to c.name, client_path(c.id), class:"btn btn-secondary" %></td>
           <td><%= c.address %></td>
           <td><%= c.phone %></td>
           <td>

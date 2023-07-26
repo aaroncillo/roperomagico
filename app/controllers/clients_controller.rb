@@ -1,7 +1,6 @@
 class ClientsController < ApplicationController
-  before_action :set_clients, only: %i[ show edit update destroy ]
+  before_action :set_client, only: %i[ show edit update destroy ]
   before_action :client_params, only: %i[ create ]
-  before_action :set_company_user, only: %i[ show index edit new create]
 
   def index
     @clients = Client.all
@@ -32,11 +31,7 @@ class ClientsController < ApplicationController
     params.require(:client).permit(:name, :address, :phone)
   end
 
-  def set_clients
+  def set_client
     @client = Client.find(params[:id])
-  end
-
-  def set_company_user
-    @company = Company.find(params[:company_id])
   end
 end
