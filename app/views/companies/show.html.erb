@@ -23,10 +23,10 @@
           <td><%= c.address %></td>
           <td><%= c.phone %></td>
           <td>
-            <%= link_to company_path(c), class:"btn btn-danger", data:{turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+            <%= link_to client_path(c), class:"btn btn-danger", data:{turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
               <i class="fa-solid fa-trash"></i>
             <% end %>
-            <%= link_to edit_company_path(c), class:"btn btn-primary", data: { turbo_frame: 'modal' } do %>
+            <%= link_to edit_client_path(c), class:"btn btn-primary", data: { turbo_frame: 'modal' } do %>
               <i class="fa-solid fa-pen-to-square"></i>
             <% end %>
           </td>
