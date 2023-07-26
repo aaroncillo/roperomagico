@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_032257) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_032515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_032257) do
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "disfraz"
+    t.text "agregado"
+    t.integer "valor"
+    t.integer "garantia"
+    t.date "init_date"
+    t.date "end_date"
+    t.bigint "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_products_on_client_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -76,4 +89,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_032257) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clients", "companies"
   add_foreign_key "companies", "users"
+  add_foreign_key "products", "clients"
 end
