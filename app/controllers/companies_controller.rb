@@ -22,6 +22,8 @@ class CompaniesController < ApplicationController
 
   def show
     @company = Company.find(params[:id])
+    @client = Client.new
+    @clients = Client.where(company_id: @company.id)
   end
 
   def edit

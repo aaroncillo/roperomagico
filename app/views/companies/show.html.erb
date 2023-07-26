@@ -1,1 +1,56 @@
-<h1>shadow</h1>
+<%= turbo_frame_tag "modal" %>
+<div class="container">
+  <h1 class="text-blue-400">Show de Companies</h1>
+
+</div>
+
+<div class="container">
+  <div class="data-table">
+    <table id="example" class="table table-striped">
+      <thead class="thead-dark">
+        <%= link_to "New Client", new_company_client_path(@company), class: "btn btn-primary", data: { turbo_frame: 'modal' } %>
+        <tr>
+          <th scope="col" class="filterable">Cliente</th>
+          <th scope="col">Disfraz</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @clients.each do |c| %>
+        <tr>
+          <td><%= c.name %></td>
+          <td><%= c.address %></td>
+          <td><%= c.phone %></td>
+          <td>
+            <%= link_to company_path(c), class:"btn btn-danger", data:{turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+            <%= link_to edit_company_path(c), class:"btn btn-primary", data: { turbo_frame: 'modal' } do %>
+              <i class="fa-solid fa-pen-to-square"></i>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= link_to "Volver", "/" %>
+<script>
+$(document).ready(function() {
+  // Verificar si el elemento ya existe antes de agregarlo
+  if ($('#example_wrapper').length === 0) {
+    var table = $('#example').DataTable({
+      "order": [[0, "asc"]],
+      "pagingType": "full_numbers",
+      "pageLength": 5,
+      "lengthMenu": [5, 10, 25, 50]
+    });
+    $("#searchBtn").on("click", function() {
+      table.draw();
+    });
+  }
+});
+</script>
