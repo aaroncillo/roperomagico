@@ -12,4 +12,10 @@ Rails.application.routes.draw do
   end
   resources :companies, except: [:index, :new, :create]
   resources :products, except: [:index, :new, :create]
+
+  resources :import do
+    collection do
+      post :import
+    end
+  end
 end

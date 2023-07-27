@@ -28,6 +28,4 @@ class Product < ApplicationRecord
 
   #Validaciones
 
-  validates :disfraz, :garantia, :valor, :agregado, :init_date, :end_date, :estado, presence: true
-  validates :estado, inclusion: { in: ESTADO }
 end

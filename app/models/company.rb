@@ -18,6 +18,8 @@
 #
 class Company < ApplicationRecord
   belongs_to :user
+  has_many :clients, dependent: :destroy
+  has_many :products, through: :clients
 
   # validaciones
 

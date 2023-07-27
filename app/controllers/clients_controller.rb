@@ -3,6 +3,8 @@ class ClientsController < ApplicationController
   before_action :client_params, only: %i[ create ]
   before_action :set_client_user, only: %i[show index edit new]
 
+
+
   def index
     @clients = Client.all
   end
