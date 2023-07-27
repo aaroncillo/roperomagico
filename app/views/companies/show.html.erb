@@ -34,21 +34,19 @@
         <% end %>
       </tbody>
     </table>
+    <%= render "import/import_form" %>
   </div>
-
 
   <%# Datepicker %>
   <div class="data-table mt-3">
     <%= form_with url: company_path, method: :get do |form| %>
       <div class="d-flex flex-column mt-3 align-items-center">
         <h2>Seleccionar fecha</h2>
-        <%= form.text_field :start_date_between, value: params[:start_date_between], data: { controller: "daterangepicker" } %>
-        <%= form.submit "search", class: "btn btn-primary mt-2" %>
+          <%= form.text_field :start_date_between, value: params[:start_date_between] || "#{Date.current.beginning_of_month} - #{Date.current.end_of_month}", data: { controller: "daterangepicker" } %>
+          <%= form.submit "search", class: "btn btn-primary mt-2" %>
       </div>
     <% end %>
   </div>
-
-
   <%# TARJETAS DE VENTAS DEL MES, ARRIENDOS DEL MES, GARANTIAS PENDIENTES. GANANCIAS => ARRIENDO+VENTAS. %>
 
   <div class="cards mt-3">
@@ -72,9 +70,6 @@
       <%= @ganancia %>
     </div>
   </div>
-
-
-
 
   <%= link_to "Volver", companies_path, class:"btn btn-warning mt-2" %>
 </div>

@@ -1,0 +1,8 @@
+<%= form_with url: import_import_index_path, method: :post do |f| %>
+  <div class="container">
+    <%= f.file_field :file, accept: ".csv" %>
+    <div class="btn-group">
+      <%= f.submit "Upload Clients", class:"btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

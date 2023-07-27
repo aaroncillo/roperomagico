@@ -87,3 +87,5 @@ gem "tailwindcss-rails", "~> 2.0"
 group :development do
   gem 'annotate'
 end
+
+gem 'csv'
