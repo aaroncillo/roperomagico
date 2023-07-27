@@ -42,17 +42,7 @@ class CompaniesController < ApplicationController
         client.products.where(init_date: starts_for_select..ends_for_select).each do |product|
           if product.estado == "VENTA"
             @valor_ventas += product.valor
-          elsif product.estado == "ARRIENDO"
-            @valor_arriendos += product.valor
-          end
-          @valor_garantias += product.garantia
-          @ganancia = @valor_ventas + @valor_arriendos
-        end
-      end
-    else
-      @clients.each do |client|
-        client.products.each do |product|
-          if product.estado == "VENTA"
+          elsif product.estado == "ENTREGADO"
             @valor_ventas += product.valor
           elsif product.estado == "ARRIENDO"
             @valor_arriendos += product.valor
