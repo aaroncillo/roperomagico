@@ -44,10 +44,12 @@ class CompaniesController < ApplicationController
             @valor_ventas += product.valor
           elsif product.estado == "ENTREGADO"
             @valor_ventas += product.valor
+            @valor_garantias = 0
           elsif product.estado == "ARRIENDO"
             @valor_arriendos += product.valor
+            @valor_garantias += product.garantia
           end
-          @valor_garantias += product.garantia
+
           @ganancia = @valor_ventas + @valor_arriendos
         end
       end
