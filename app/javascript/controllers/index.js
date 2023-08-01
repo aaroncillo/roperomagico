@@ -15,3 +15,6 @@ application.register("show", ShowController)
 
 import TurboModalController from "./turbo_modal_controller"
 application.register("turbo-modal", TurboModalController)
+
+import SubmitController from "./submit_controller"
+application.register("submit", SubmitController)

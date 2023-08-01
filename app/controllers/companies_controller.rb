@@ -1,7 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[show edit update destroy]
   before_action :set_company_user, only: %i[show index edit new]
-  before_action :company_params, only: %i[ create ]
 
   def index
     @companies = Company.all
@@ -14,17 +13,22 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     @company.user = current_user
-    if @company.save
-      redirect_to companies_path
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @company.save
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend('companies', partial: 'companies/company', locals: {company: @company}) }
+        format.html { redirect_to companies_path, notice: "Post was successfully created." }
+      else
+        format.html { render :new, status: :unprocessable_entity}
+      end
     end
   end
 
   def show
     @company = Company.find(params[:id])
     @client = Client.new
-    @clients = Client.where(company_id: @company.id).includes(:products) # Cargar los productos asociados a los clientes de forma eficiente.
+    filtered = Client.where("name LIKE ?", "%#{params[:filter]}%").all
+    @pagy, @clients = pagy(filtered.all, items: 5)
+    @start_date_between = params[:start_date_between]
 
     # DatePicker
 
@@ -38,21 +42,16 @@ class CompaniesController < ApplicationController
       starts_for_select = Date.strptime(starts, "%m/%d/%Y")
       ends_for_select = Date.strptime(ends, "%m/%d/%Y")
 
-      @clients.each do |client|
-        client.products.where(init_date: starts_for_select..ends_for_select).each do |product|
-          if product.estado == "VENTA"
-            @valor_ventas += product.valor
-          elsif product.estado == "ENTREGADO"
-            @valor_ventas += product.valor || 0
-            @valor_garantias = 0 || 0
-          elsif product.estado == "ARRIENDO" || "CASO" || "RESERVA"
-            @valor_arriendos += product.valor || 0
-            @valor_garantias += product.garantia || 0
-          end
+      # Obtenemos todos los productos relevantes en un solo paso
+      relevant_products = Product.where(client_id: @clients.pluck(:id), init_date: starts_for_select..ends_for_select)
 
-          @ganancia = @valor_ventas + @valor_arriendos
-        end
-      end
+      # Calculamos los totales directamente con consultas de la base de datos
+      @valor_ventas = relevant_products.where(estado: "VENTA").sum(:valor)
+      @valor_arriendos = relevant_products.where(estado: ["ARRIENDO", "CASO", "RESERVA"]).sum(:valor)
+      @valor_garantias = relevant_products.where(estado: "ARRIENDO").sum(:garantia)
+
+      # Calculamos la ganancia total
+      @ganancia = @valor_ventas + @valor_arriendos
     end
   end
 

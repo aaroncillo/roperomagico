@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :companies, only: [:index, :new, :create] do
+    post '/mostrar_fecha', to: 'companies#show'
     resources :clients, only: [:index, :new, :create]
   end
   resources :clients, except: [:index, :new, :create] do
@@ -18,4 +19,6 @@ Rails.application.routes.draw do
       post :import
     end
   end
+
+
 end

@@ -3,8 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    const defaultStartDate = moment().startOf('month').format('YYYY-MM-DD');
-    const defaultEndDate = moment().endOf('month').format('YYYY-MM-DD');
     new DateRangePicker(this.element, {
       alwaysShowCalendars: true,
       autoApply: true,
@@ -15,8 +13,6 @@ export default class extends Controller {
           'This Month': [moment().startOf('month').startOf('day'), moment().endOf('month').endOf('day')],
           'All time': [moment('2010-11-15'), moment()],
       },
-      startDate: moment().startOf('month'),
-      endDate: moment().endOf('month'),
     })
   }
 }

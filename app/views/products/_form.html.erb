@@ -19,3 +19,32 @@
     </div>
   <% end %>
 </div>
+<%= form_with model: [@client, @product], id: dom_id(@product, "form"), class: "table min-w-full" do |form| %>
+  <div>
+    <%= form.text_field :disfraz, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full" %>
+    <%= inline_error_for(:disfraz, @product) %>
+  </div>
+  <div>
+    <%= form.text_field :agregado, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full" %>
+    <%= inline_error_for(:agregado, @product) %>
+  </div>
+  <div>
+    <%= form.text_field :valor, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full" %>
+    <%= inline_error_for(:valor, @product) %>
+  </div>
+  <div>
+    <%= form.text_field :garantia, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full" %>
+    <%= inline_error_for(:garantia, @product) %>
+  </div>
+  <div>
+    <%= form.date_field :init_date, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full datefield" %>
+    <%= inline_error_for(:init_date, @product) %>
+  </div>
+  <div>
+    <%= form.date_field :end_date, class: "block rounded-md border border-gray-200 outline-none px-3 py-2  w-full datefield" %>
+    <%= inline_error_for(:end_date, @product) %>
+  </div>
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

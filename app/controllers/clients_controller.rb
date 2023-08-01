@@ -19,7 +19,7 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
     @client.company = @company
     if @client.save
-      redirect_to company_path(@company)
+      redirect_to company_path(@company), notice: 'Client was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end

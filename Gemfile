@@ -89,3 +89,7 @@ group :development do
 end
 
 gem 'csv'
+
+gem "view_component", "~> 3.5"
+
+gem "pagy", "~> 6.0"
