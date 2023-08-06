@@ -26,7 +26,7 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     @client = Client.new
-    filtered = Client.where("name LIKE ?", "%#{params[:filter]}%").all
+    filtered = Client.where(company_id: @company.id).includes(:products).where("name LIKE ?", "%#{params[:filter]}%").all
     @pagy, @clients = pagy(filtered.all, items: 5)
     @start_date_between = params[:start_date_between]
 

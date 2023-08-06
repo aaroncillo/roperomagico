@@ -14,10 +14,11 @@ class ProductsController < ApplicationController
 
   def create
     @client = Client.find(params[:client_id])
+    @product = @client.products.build(product_params)
     @product = Product.new(product_params)
     @product.client = @client
     if @product.save
-      redirect_to client_path(@client)
+      redirect_to client_path(@client), notice: 'Product was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,7 +41,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to client_path(@product), notice: 'Product was successfully destroyed.', status: :see_other
+    redirect_to client_path(@product.client), notice: 'Product was successfully destroyed.', status: :see_other
   end
 
   private
