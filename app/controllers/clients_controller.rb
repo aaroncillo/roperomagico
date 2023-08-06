@@ -18,10 +18,13 @@ class ClientsController < ApplicationController
     @company = Company.find(params[:company_id])
     @client = Client.new(client_params)
     @client.company = @company
-    if @client.save
-      redirect_to company_path(@company), notice: 'Client was successfully created.'
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @client.save
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend('clients', partial: 'clients/client2', locals: {client: @client}) }
+        format.html { redirect_to client_path(@client), notice: "Post was successfully created." }
+      else
+        format.html { render :new, status: :unprocessable_entity}
+      end
     end
   end
 

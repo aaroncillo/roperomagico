@@ -11,8 +11,8 @@
       <th scope="col">Estado</th>
       <th scope="col">Accion</th>
     </tr>
-    <%= turbo_frame_tag "new-product-form" %>
-    <%= link_to "New Product", new_client_product_path(@client), class: "btn btn-primary", data: { turbo_frame: 'new-product-form' } %>
+    <%= turbo_frame_tag "modal" %>
+    <%= link_to "New Product", new_client_product_path(@client), class: "btn btn-primary mt-3 mb-3", data: { turbo_frame: 'modal' } %>
   </thead>
   <tbody>
     <% @products.each do |p| %>
