@@ -1,0 +1,20 @@
+<div class="data-table mt-3">
+  <%= form_with url: company_balances_path, method: :get, remote: true do |form| %>
+    <div class="d-flex flex-column mt-3 align-items-center">
+      <h2>Seleccionar fecha</h2>
+      <%= form.text_field :start_date_between, value: params[:start_date_between], data: { controller: "daterangepicker" } %>
+      <%= form.submit "search", class: "btn btn-primary mt-2" %>
+    </div>
+  <% end %>
+</div>
+<div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+  <h1>Ventas:</h1>
+  <%= @valor_ventas %>
+</div>
+
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
+    <h1>Arriendos:</h1>
+    <%= @valor_arriendos %>
+    </div>
+
+<%= link_to "Volver", company_path(@company), class:"btn btn-warning mt-2" %>

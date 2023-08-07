@@ -28,6 +28,12 @@ class CompaniesController < ApplicationController
     @client = Client.new
     filtered = Client.where(company_id: @company.id).includes(:products).where("name LIKE ?", "%#{params[:filter]}%").all
     @pagy, @clients = pagy(filtered.all, items: 5)
+  end
+
+  def balances
+    @company = Company.find(params[:company_id])
+    @client = Client.new
+    filtered = Client.where(company_id: @company.id).includes(:products).where("name LIKE ?", "%#{params[:filter]}%").all
 
     # DatePicker
 

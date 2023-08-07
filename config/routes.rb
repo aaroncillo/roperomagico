@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :companies, only: [:index, :new, :create] do
-    post '/mostrar_fecha', to: 'companies#show'
+    get 'balances', to: 'companies#balances'
     resources :clients, only: [:index, :new, :create]
   end
   resources :clients, except: [:index, :new, :create] do
