@@ -4,12 +4,30 @@
 </div>
 
 <div class="container">
+  <div class="data-table mt-3">
+    <%= form_with url: company_path, method: :get, remote: true do |form| %>
+      <div class="d-flex flex-column mt-3 align-items-center">
+        <h2>Seleccionar fecha</h2>
+        <%= form.text_field :start_date_between, value: params[:start_date_between], data: { controller: "daterangepicker" } %>
+        <%= form.submit "search", class: "btn btn-primary mt-2" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+    <h1>Ventas:</h1>
+    <%= @valor_ventas %>
+  </div>
+      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
+      <h1>Arriendos:</h1>
+      <%= @valor_arriendos %>
+    </div>
   <div>
     <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do %>
       <%= text_field_tag "filter", nil, placeholder: "Filtro", class:"inline-block rounded-md border border-gray-200 outline-none px-3 py-2", oninput: "this.value = this.value.toUpperCase();" %>
     <% end %>
   </div>
     <%= render "client", company: @company %>
+
 
   <%= link_to "Volver", companies_path, class:"btn btn-warning mt-2" %>
 </div>

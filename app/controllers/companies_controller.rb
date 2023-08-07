@@ -28,30 +28,25 @@ class CompaniesController < ApplicationController
     @client = Client.new
     filtered = Client.where(company_id: @company.id).includes(:products).where("name LIKE ?", "%#{params[:filter]}%").all
     @pagy, @clients = pagy(filtered.all, items: 5)
-    @start_date_between = params[:start_date_between]
 
     # DatePicker
 
     @valor_ventas = 0
     @valor_arriendos = 0
-    @valor_garantias = 0
-    @ganancia = 0
 
     if params[:start_date_between]
       starts, ends = params[:start_date_between].split(" - ")
       starts_for_select = Date.strptime(starts, "%m/%d/%Y")
       ends_for_select = Date.strptime(ends, "%m/%d/%Y")
 
-      # Obtenemos todos los productos relevantes en un solo paso
-      relevant_products = Product.where(client_id: @clients.pluck(:id), init_date: starts_for_select..ends_for_select)
+      # Cálculo de valores directamente en SQL
+      @valor_ventas = Product.where(client_id: filtered.pluck(:id),
+                                    init_date: starts_for_select..ends_for_select,
+                                    estado: ["ENTREGADO", "VENTA"]).sum(:valor)
 
-      # Calculamos los totales directamente con consultas de la base de datos
-      @valor_ventas = relevant_products.where(estado: "VENTA").sum(:valor)
-      @valor_arriendos = relevant_products.where(estado: ["ARRIENDO", "CASO", "RESERVA"]).sum(:valor)
-      @valor_garantias = relevant_products.where(estado: "ARRIENDO").sum(:garantia)
-
-      # Calculamos la ganancia total
-      @ganancia = @valor_ventas + @valor_arriendos
+      @valor_arriendos = Product.where(client_id: filtered.pluck(:id),
+                                       init_date: starts_for_select..ends_for_select,
+                                       estado: "ARRIENDO").sum(:valor)
     end
   end
 
