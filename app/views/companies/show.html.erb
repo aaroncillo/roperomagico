@@ -1,5 +1,4 @@
 <%= turbo_frame_tag "modal" %>
-<%= turbo_frame_tag "clients" %>
 <div class="container">
   <h1 class="text-blue-400 text-center"><%= @company.name_company %></h1>
 </div>
@@ -10,9 +9,7 @@
       <%= text_field_tag "filter", nil, placeholder: "Filtro", class:"inline-block rounded-md border border-gray-200 outline-none px-3 py-2", oninput: "this.value = this.value.toUpperCase();" %>
     <% end %>
   </div>
-  <%= turbo_frame_tag "clients" do %>
     <%= render "client", company: @company %>
-  <% end %>
 
   <div class="d-flex justify-content-between">
     <%= link_to "Volver", companies_path, class:"btn btn-warning mt-2" %>
