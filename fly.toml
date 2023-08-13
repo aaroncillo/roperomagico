@@ -1,0 +1,29 @@
+<<<<<<< HEAD
+# fly.toml app configuration file generated for roperomagico on 2023-08-09T21:21:49-04:00
+=======
+# fly.toml app configuration file generated for roperomagico on 2023-08-12T17:33:04-04:00
+>>>>>>> e64e38a0d430d9c63a4facd09b7af422f31e35f0
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "roperomagico"
+primary_region = "scl"
+console_command = "/rails/bin/rails console"
+
+[build]
+
+[deploy]
+  release_command = "./bin/rails db:prepare"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[statics]]
+  guest_path = "/rails/public"
+  url_prefix = "/"

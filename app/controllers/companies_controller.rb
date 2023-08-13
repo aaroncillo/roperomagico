@@ -3,7 +3,7 @@ class CompaniesController < ApplicationController
   before_action :set_company_user, only: %i[show index edit new]
 
   def index
-    @companies = Company.all
+    @companies = Company.where(user_id: current_user.id)
   end
 
   def new
