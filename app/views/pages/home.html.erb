@@ -4,7 +4,10 @@
     <div class="col-md-8">
       <h1>¡Bienvenido a la plataforma de empleo!</h1>
       <p class="lead">Encuentra el trabajo que buscas o publica tu oferta de empleo.</p>
-      <%= link_to "Empresas", companies_path, class: "btn btn-dark btn-grande" %>
+      <% if user_signed_in? %>
+        <%= link_to "Empresas", companies_path, class: "btn btn-dark btn-grande"%>
+      <% else %>
+      <% end %>
     </div>
     <div class="col-md-4">
       <div class="data-table">
