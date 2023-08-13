@@ -13,7 +13,9 @@
     <tbody>
       <% @clients.each do |c| %>
       <tr>
-        <td><%= link_to c.name, client_path(c.id), class:"btn btn-secondary w-100" %></td>
+        <td>
+        <button class="btn btn-secondary w-100" onclick="window.location.href='<%= client_path(c.id) %>'"><%= c.name %></button>
+        </td>
         <td class="text-center"><%= c.address %></td>
         <td class="text-center"><%= c.phone %></td>
         <td class="text-center">
