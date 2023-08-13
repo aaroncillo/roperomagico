@@ -11,8 +11,6 @@ class ImportController < ApplicationController
 
 
     user = current_user
-
-
     # import data
     csvImportService = CsvImportService.new(file,user)
     csvImportService.import

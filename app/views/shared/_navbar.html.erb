@@ -53,7 +53,7 @@
             <% if user_signed_in? %>
               <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
             <% else %>
-              <%= link_to "Login", companies_path, class:"btn btn-primary", data: { turbo_frame: 'modal' } %>
+              <%= link_to "Login", user_session_path, class:"btn btn-primary" %>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <% if user_signed_in? %>
