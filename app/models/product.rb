@@ -27,6 +27,5 @@ class Product < ApplicationRecord
   belongs_to :client
 
   #Validaciones
-  validates :estado, presence: true
 
 end
