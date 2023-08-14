@@ -37,8 +37,8 @@ class CompaniesController < ApplicationController
       filtered = filtered.where("phone ILIKE ?", "%#{params[:phone_filter]}%")
     end
 
-    if params[:phone_filter].present?
-      filtered = filtered.where("phone ILIKE ?", "%#{params[:phone_filter]}%")
+    if params[:rut_filter].present?
+      filtered = filtered.where("rut ILIKE ?", "%#{params[:rut_filter]}%")
     end
 
     @pagy, @clients = pagy(filtered.all, items: 5)
