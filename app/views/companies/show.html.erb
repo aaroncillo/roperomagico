@@ -4,16 +4,31 @@
 </div>
 
 <div class="container">
-  <div>
-    <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do %>
-      <%= text_field_tag "filter", nil, placeholder: "Filtro", class:"inline-block rounded-md border border-gray-200 outline-none px-3 py-2", oninput: "this.value = this.value.toUpperCase();" %>
-    <% end %>
+  <div class="d-flex justify-content-around mb-2">
+    <div>
+      <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do %>
+        <button type="button" class="filter-button inline-block rounded-md border border-gray-200 outline-none px-3 py-2">Filtrar por nombre</button>
+        <%= text_field_tag "filter", nil, placeholder: "NOMBRE", class:"filter-input hidden rounded-md border border-gray-200 outline-none px-3 py-2", oninput: "this.value = this.value.toUpperCase();" %>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do %>
+        <button type="button" class="filter-button inline-block rounded-md border border-gray-200 outline-none px-3 py-2">Filtrar por teléfono</button>
+        <%= text_field_tag "phone_filter", nil, placeholder: "TELEFONO", class: "filter-input hidden rounded-md border border-gray-200 outline-none px-3 py-2" %>
+      <% end %>
+    </div>
+    <div>
+      <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do %>
+        <button type="button" class="filter-button inline-block rounded-md border border-gray-200 outline-none px-3 py-2">Filtrar por RUT</button>
+        <%= text_field_tag "rut_filter", nil, placeholder: "RUT", class: "filter-input hidden rounded-md border border-gray-200 outline-none px-3 py-2" %>
+      <% end %>
+    </div>
   </div>
   <%= turbo_frame_tag "clients" do %>
     <%= render "client", company: @company %>
   <% end %>
   <div class="d-flex justify-content-between">
-    <%= link_to "Volver", company_path(@company), class:"btn btn-warning mt-2" %>
+    <%= link_to "Volver", companies_path, class:"btn btn-warning mt-2" %>
     <%= link_to "Balances", company_balances_path(@company), class:"btn btn-success mt-2" %>
   </div>
 </div>

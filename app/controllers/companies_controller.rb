@@ -26,7 +26,21 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     @client = Client.new
-    filtered = Client.where(company_id: @company.id).includes(:products).where("name LIKE ?", "%#{params[:filter]}%").all
+
+    filtered = Client.where(company_id: @company.id)
+
+    if params[:filter].present?
+      filtered = filtered.where("name ILIKE ?", "%#{params[:filter]}%")
+    end
+
+    if params[:phone_filter].present?
+      filtered = filtered.where("phone ILIKE ?", "%#{params[:phone_filter]}%")
+    end
+
+    if params[:rut_filter].present?
+      filtered = filtered.where("rut ILIKE ?", "%#{params[:rut_filter]}%")
+    end
+
     @pagy, @clients = pagy(filtered.all, items: 5)
   end
 

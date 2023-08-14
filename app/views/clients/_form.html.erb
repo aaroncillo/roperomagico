@@ -3,6 +3,7 @@
   <%= simple_form_for [@company, @client] do |f| %>
     <%= f.input :name, autofocus: true  %>
     <%= f.input :address  %>
+    <%= f.input :rut  %>
     <%= f.input :phone  %>
     <%= f.submit class: "btn btn-success" %>
   <% end %>
