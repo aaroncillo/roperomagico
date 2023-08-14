@@ -29,7 +29,17 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
     @product = Product.new
     @products = Product.where(client_id: @client.id)
+  end
 
+  def export_all_csv
+    @clients = Client.includes(:products)
+
+    respond_to do |format|
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"all_clients_and_products.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def edit

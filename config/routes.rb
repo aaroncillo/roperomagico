@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :clients, only: [:index, :new, :create]
   end
   resources :clients, except: [:index, :new, :create] do
+    member do
+      get :export_all_csv
+    end
     resources :products, only: [:index, :new, :create]
   end
   resources :companies, except: [:index, :new, :create]

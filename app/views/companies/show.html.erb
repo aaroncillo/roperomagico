@@ -4,6 +4,7 @@
 </div>
 
 <div class="container">
+<%= link_to "Export All Clients to CSV", export_all_csv_client_path(format: :csv), class: "btn btn-secondary" %>
   <div class="d-flex justify-content-around mb-2">
     <div>
       <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do |form| %>

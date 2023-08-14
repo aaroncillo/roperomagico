@@ -1,0 +1,7 @@
+# app/views/clients/export_all_csv.csv.erb
+Cliente,Disfraz,Agregado,Valor,Garantía,Fecha de inicio,Fecha de fin,Estado
+<% @clients.each do |client| %>
+  <% client.products.each do |product| %>
+    "<%= client.name %>","<%= product.disfraz %>","<%= product.agregado %>","<%= product.valor %>","<%= product.garantia %>","<%= product.init_date %>","<%= product.end_date %>","<%= product.estado %>"
+  <% end %>
+<% end %>
