@@ -6,21 +6,21 @@
 <div class="container">
   <div class="d-flex justify-content-around mb-2">
     <div>
-      <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do %>
-        <button type="button" class="filter-button inline-block rounded-md border border-gray-200 outline-none px-3 py-2">Filtrar por nombre</button>
-        <%= text_field_tag "filter", nil, placeholder: "NOMBRE", class:"filter-input hidden rounded-md border border-gray-200 outline-none px-3 py-2", oninput: "this.value = this.value.toUpperCase();" %>
+      <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do |form| %>
+        <%= button_tag "Filtrar por nombre", type: "button", class: "filter-button inline-block rounded-md border border-gray-200 outline-none px-3 py-2", data: { action: "click->show#toggleFilterInput", target: "show.filterButton" } %>
+        <%= text_field_tag "filter", nil, placeholder: "NOMBRE", class: "filter-input hidden rounded-md border border-gray-200 outline-none px-3 py-2", oninput: "this.value = this.value.toUpperCase();", data: { target: "show.filterInput" } %>
       <% end %>
     </div>
     <div>
-      <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do %>
-        <button type="button" class="filter-button inline-block rounded-md border border-gray-200 outline-none px-3 py-2">Filtrar por teléfono</button>
-        <%= text_field_tag "phone_filter", nil, placeholder: "TELEFONO", class: "filter-input hidden rounded-md border border-gray-200 outline-none px-3 py-2" %>
+      <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do |form| %>
+        <%= button_tag "Filtrar por Celular", type: "button", class: "filter-button inline-block rounded-md border border-gray-200 outline-none px-3 py-2", data: { action: "click->show#togglePhoneFilterInput", target: "show.phoneFilterButton" } %>
+        <%= text_field_tag "phone_filter", nil, placeholder: "TELEFONO", class: "filter-input hidden rounded-md border border-gray-200 outline-none px-3 py-2", data: { target: "show.phoneFilterInput" } %>
       <% end %>
     </div>
     <div>
-      <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do %>
-        <button type="button" class="filter-button inline-block rounded-md border border-gray-200 outline-none px-3 py-2">Filtrar por RUT</button>
-        <%= text_field_tag "rut_filter", nil, placeholder: "RUT", class: "filter-input hidden rounded-md border border-gray-200 outline-none px-3 py-2" %>
+      <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do |form| %>
+        <%= button_tag "Filtrar por RUT", type: "button", class: "filter-button inline-block rounded-md border border-gray-200 outline-none px-3 py-2", data: { action: "click->show#toggleRutFilterInput", target: "show.RutFilterButton" } %>
+        <%= text_field_tag "rut_filter", nil, placeholder: "RUT", class: "filter-input hidden rounded-md border border-gray-200 outline-none px-3 py-2", data: { target: "show.RutFilterInput" }  %>
       <% end %>
     </div>
   </div>
