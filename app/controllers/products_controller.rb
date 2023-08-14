@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @editing = false
     @client = Client.find(params[:client_id])
     @product = Product.new
   end
@@ -18,7 +19,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.client = @client
     if @product.save
-      redirect_to client_path(@client), notice: 'Product was successfully created.'
+      redirect_to client_path(@client), notice: 'Product was successfully created.', status: :see_other
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,6 +30,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @editing = true
   end
 
   def update

@@ -1,10 +1,21 @@
 <h1>Nuevo Cliente</h1>
-<div class="text-center">
-  <%= simple_form_for [@company, @client] do |f| %>
-    <%= f.input :name, autofocus: true  %>
-    <%= f.input :address  %>
-    <%= f.input :rut  %>
-    <%= f.input :phone  %>
-    <%= f.submit class: "btn btn-success" %>
-  <% end %>
-</div>
+<% if @editing %>
+  <div class="text-center">
+    <%= simple_form_for [@company, @client] do |f| %>
+      <%= f.input :name, autofocus: true  %>
+      <%= f.input :address  %>
+      <%= f.input :rut  %>
+      <%= f.input :phone  %>
+      <%= f.submit class: "btn btn-success", data:{turbo_method: :update, turbo_confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center">
+    <%= simple_form_for [@company, @client] do |f| %>
+      <%= f.input :name, autofocus: true  %>
+      <%= f.input :address  %>
+      <%= f.input :rut  %>
+      <%= f.input :phone  %>
+      <%= f.submit class: "btn btn-success" %>
+    <% end %>
+<% end %>

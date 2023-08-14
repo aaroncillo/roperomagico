@@ -7,6 +7,7 @@ class CompaniesController < ApplicationController
   end
 
   def new
+    @editing = false
     @company = Company.new
   end
 
@@ -71,6 +72,7 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    @editing = true
   end
 
   def update

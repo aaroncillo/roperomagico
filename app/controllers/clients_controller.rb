@@ -10,6 +10,7 @@ class ClientsController < ApplicationController
   end
 
   def new
+    @editing = false
     @company = Company.find(params[:company_id])
     @client = Client.new
   end
@@ -43,6 +44,7 @@ class ClientsController < ApplicationController
   end
 
   def edit
+    @editing = true
   end
 
   def update
