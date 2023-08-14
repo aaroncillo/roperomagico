@@ -1,7 +1,10 @@
-# app/views/clients/export_all_csv.csv.erb
-Cliente,Disfraz,Agregado,Valor,Garantía,Fecha de inicio,Fecha de fin,Estado
+cliente,direccion,celular,rut,disfraz,agregado,valor,garantia,fechaa,fechad,estado
 <% @clients.each do |client| %>
-  <% client.products.each do |product| %>
-    "<%= client.name %>","<%= product.disfraz %>","<%= product.agregado %>","<%= product.valor %>","<%= product.garantia %>","<%= product.init_date %>","<%= product.end_date %>","<%= product.estado %>"
+  <% if client.products.present? %>
+    <% client.products.each do |product| %>
+      <%= client.name %>,<%= client.address %>,<%= client.phone %>,<%= client.rut %>,<%= product.disfraz %>,<%= product.agregado %>,<%= product.valor %>,<%= product.garantia %>,<%= product.init_date %>,<%= product.end_date %>,<%= product.estado %>
+    <% end %>
+  <% else %>
+    <%= client.name %>,,,,,,,
   <% end %>
 <% end %>

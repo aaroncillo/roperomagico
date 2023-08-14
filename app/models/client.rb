@@ -24,5 +24,4 @@ class Client < ApplicationRecord
   has_many :products, dependent: :destroy
 
   # rut unico
-  validates :rut, uniqueness: true
 end
