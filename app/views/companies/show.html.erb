@@ -9,6 +9,11 @@
       <%= text_field_tag "filter", nil, placeholder: "Filtro", class:"inline-block rounded-md border border-gray-200 outline-none px-3 py-2", oninput: "this.value = this.value.toUpperCase();" %>
     <% end %>
   </div>
+  <div>
+  <%= form_with url: company_path, method: :get, data: { turbo_frame: "clients", turbo_action: "advance", controller: "show", action: "input->show#submit" } do %>
+    <%= text_field_tag "phone_filter", nil, placeholder: "Filtrar por número de teléfono", class: "inline-block rounded-md border border-gray-200 outline-none px-3 py-2" %>
+  <% end %>
+  </div>
   <%= turbo_frame_tag "clients" do %>
     <%= render "client", company: @company %>
   <% end %>
