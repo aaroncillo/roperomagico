@@ -7,6 +7,7 @@ class CompaniesController < ApplicationController
   end
 
   def new
+    @editing = false
     @company = Company.new
   end
 
@@ -53,6 +54,7 @@ class CompaniesController < ApplicationController
 
     @valor_ventas = 0
     @valor_arriendos = 0
+    @valor_garantias = 0
 
     if params[:start_date_between]
       starts, ends = params[:start_date_between].split(" - ")
@@ -62,15 +64,20 @@ class CompaniesController < ApplicationController
       # Cálculo de valores directamente en SQL
       @valor_ventas = Product.where(client_id: filtered.pluck(:id),
                                     init_date: starts_for_select..ends_for_select,
-                                    estado: ["ENTREGADO", "VENTA"]).sum(:valor)
+                                    estado: ["VENTA"]).sum(:valor)
 
       @valor_arriendos = Product.where(client_id: filtered.pluck(:id),
                                        init_date: starts_for_select..ends_for_select,
                                        estado: "ARRIENDO").sum(:valor)
+
+      @valor_garantias = Product.where(client_id: filtered.pluck(:id),
+      init_date: starts_for_select..ends_for_select,
+      estado: ["VENTA","ARRIENDO","ENTREGADO"]).sum(:garantia)
     end
   end
 
   def edit
+    @editing = true
   end
 
   def update

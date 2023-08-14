@@ -7,14 +7,30 @@
     </div>
   <% end %>
 </div>
-<div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-  <h1>Ventas:</h1>
-  <%= @valor_ventas %>
-</div>
 
-    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
-    <h1>Arriendos:</h1>
-    <%= @valor_arriendos %>
+<div class="grande">
+
+  <div class="cards container mt-2">
+    <div class="card-category mt-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://c4.wallpaperflare.com/wallpaper/966/989/139/shrek-movies-animated-movies-dreamworks-hd-wallpaper-preview.jpg)">
+      <div class="d-flex flex-column text-center">
+        <h1 class="text-decoration-underline">Ventas</h1>
+        <h1 class="display-2 text-light fw-bold"><%= @valor_ventas %></h1>
+      </div>
     </div>
 
+    <div class="card-category mt-5 " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://cdn2.tfx.company/images/clickwallpapers-CouragetheCowardlyDog-desenhos-fullhd-img1.jpg)">
+    <div class="d-flex flex-column text-center">
+      <h1 class="text-decoration-underline">Arriendos</h1>
+      <h1 class="display-2 text-light fw-bold"><%= @valor_arriendos %></h1>
+    </div>
+    </div>
+
+    <div class="card-category mt-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://fondosmil.com/fondo/32256.jpg)">
+    <div class="d-flex flex-column text-center">
+      <h1 class="text-decoration-underline">Garantias</h1>
+      <h1 class="display-2 text-light fw-bold"><%= @valor_garantias %></h1>
+    </div>
+    </div>
+  </div>
+</div>
 <%= link_to "Volver", company_path(@company), class:"btn btn-warning mt-2" %>
