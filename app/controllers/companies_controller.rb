@@ -77,6 +77,11 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def morosos
+    @products = Product.where('end_date < ?', Date.today).where.not(estado: 'ENTREGADO')
+    @morosos_by_client = @products.group_by { |p| p.client }
+  end
+
   def edit
     @editing = true
   end

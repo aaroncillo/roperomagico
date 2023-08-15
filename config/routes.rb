@@ -23,5 +23,6 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'morosos', to: 'companies#morosos'
 
 end

@@ -35,7 +35,11 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to client_path(@product.client), notice: 'Product was successfully updated.'
+      if request.referer.include?('morosos')
+        redirect_to morosos_path, notice: 'Product was successfully updated from morosos.'
+      else
+        redirect_to client_path(@product.client), notice: 'Product was successfully updated.'
+      end
     else
       render :edit, status: :unprocessable_entity
     end
