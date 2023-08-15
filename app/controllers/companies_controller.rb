@@ -28,7 +28,8 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @client = Client.new
 
-    filtered = Client.where(company_id: @company.id)
+
+    filtered = Client.where(company_id: @company.id).order(id: :asc)
 
     if params[:filter].present?
       filtered = filtered.where("name ILIKE ?", "%#{params[:filter]}%")

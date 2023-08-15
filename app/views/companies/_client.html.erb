@@ -1,7 +1,7 @@
 <div class="table-responsive">
 
-  <table class="table table-striped table-bordered table-hover">
-    <thead class="thead-dark">
+  <table class="table table-striped table-bordered table-hover mt-2">
+    <thead class="table-dark">
       <%= link_to "New Client", new_company_client_path(@company), class: "btn btn-primary", data: { turbo_frame: 'modal' } %>
       <tr>
         <th scope="col" class="filterable text-center">Cliente</th>
@@ -32,6 +32,12 @@
       <% end %>
     </tbody>
   </table>
-  <%= render "import/import_form" %>
+  <div class="d-flex">
+    <div class="mb-2">
+      <%= render "import/import_form" %>
+    </div>
+    <div>
+    </div>
+  </div>
 </div>
 <%= pagy_bootstrap_nav(@pagy).html_safe %>

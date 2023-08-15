@@ -24,16 +24,14 @@
         </button>
       </div>
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex flex-shrink-0 items-center">
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-        </div>
+          <%= image_tag "galleta.png", width: 40, height: 40 %>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Team</a>
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
+            <% if @company %>
+              <%= link_to "Graficos", "#", class:"bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" %>
+              <%= link_to "Balances", company_balances_path(@company), class:"bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -51,7 +49,7 @@
               <span class="sr-only">Open user menu</span>
             </button>
             <% if user_signed_in? %>
-              <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+              <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://pbs.twimg.com/profile_images/617450950018617345/F9eF5hkc_400x400.jpg" />
             <% else %>
               <%= link_to "Login", companies_path, class:"btn btn-primary", data: { turbo_frame: 'modal'} %>
             <% end %>
