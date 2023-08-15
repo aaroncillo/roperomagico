@@ -28,11 +28,12 @@
         <%= f.input :disfraz, autofocus: true, label: "Disfraz" %>
         <%= f.input :agregado, label: "Agregado" %>
         <%= f.input :valor, label: "Valor" %>
+        <%= f.input :garantia, label: "Garantía" %>
       </div>
       <div class="col-md-6">
-        <%= f.input :garantia, label: "Garantía" %>
-        <%= f.input :init_date, label: "Fecha de inicio", order: [:day, :month, :year], html5: true %>
-        <%= f.input :end_date, label: "Fecha de fin", order: [:day, :month, :year], html5: true %>
+        <%= f.input :init_date, label: "Fecha de Arriendo", order: [:day, :month, :year], html5: true %>
+        <%= f.input :end_date, label: "Fecha de Entrega", order: [:day, :month, :year], html5: true %>
+        <%= f.input :end_date, label: "Fecha de Reserva", order: [:day, :month, :year], html5: true %>
          <%= f.label :estado %>
         <%= f.select :estado, Product::ESTADO %>
       </div>
