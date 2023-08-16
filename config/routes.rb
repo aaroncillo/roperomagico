@@ -24,5 +24,7 @@ Rails.application.routes.draw do
   end
 
   get 'morosos', to: 'companies#morosos'
+  get 'prestamos', to: 'companies#prestamos'
+  get 'reservas', to: 'companies#reservas'
 
 end

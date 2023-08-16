@@ -82,6 +82,18 @@ class CompaniesController < ApplicationController
     @morosos_by_client = @products.group_by { |p| p.client }
   end
 
+  def prestamos
+    console
+    filtered = Product.where(estado: 'PRESTAMO').order(id: :asc)
+    @pagy, @products = pagy(filtered.all, items: 5)
+  end
+
+  def reservas
+    console
+    filtered = Product.where(estado: 'RESERVA').order(id: :asc)
+    @pagy, @products = pagy(filtered.all, items: 5)
+  end
+
   def edit
     @editing = true
   end

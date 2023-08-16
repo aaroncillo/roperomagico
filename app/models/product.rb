@@ -23,7 +23,7 @@
 #  fk_rails_...  (client_id => clients.id)
 #
 class Product < ApplicationRecord
-  ESTADO = %w(ARRIENDO ENTREGADO VENTA PRESTADO RESERVA)
+  ESTADO = %w(ARRIENDO ENTREGADO VENTA PRESTAMO RESERVA)
   belongs_to :client
 
   #Validaciones
