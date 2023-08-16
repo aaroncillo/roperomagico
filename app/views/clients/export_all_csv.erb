@@ -1,8 +1,8 @@
-cliente,direccion,celular,rut,disfraz,agregado,valor,garantia,fechaa,fechad,estado
+id,cliente,direccion,celular,rut,disfraz,agregado,valor,garantia,fechaa,fechad,estado,fechareserva
 <% @clients.each do |client| %>
   <% if client.products.present? %>
     <% client.products.each do |product| %>
-      <%= client.name %>,<%= client.address %>,<%= client.phone %>,<%= client.rut %>,<%= product.disfraz %>,<%= product.agregado %>,<%= product.valor %>,<%= product.garantia %>,<%= product.init_date %>,<%= product.end_date %>,<%= product.estado %>
+      <%= client.id %>,<%= client.name %>,<%= client.address %>,<%= client.phone %>,<%= client.rut %>,<%= product.disfraz %>,<%= product.agregado %>,<%= product.valor %>,<%= product.garantia %>,<%= product.init_date %>,<%= product.end_date %>,<%= product.estado %>,<%= product.reserva_date %>
     <% end %>
   <% else %>
     <%= client.name %>,,,,,,,

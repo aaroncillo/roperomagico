@@ -33,7 +33,7 @@ class ClientsController < ApplicationController
   end
 
   def export_all_csv
-    @clients = Client.includes(:products)
+    @clients = Client.includes(:products).order(:id)
 
     respond_to do |format|
       format.csv do

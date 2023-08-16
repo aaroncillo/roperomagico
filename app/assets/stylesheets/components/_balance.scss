@@ -1,0 +1,37 @@
+.submit-area {
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 5px 5px gray;
+  color: white;
+  background-color: royalblue;
+}
+
+.bullet-list {
+  list-style-type: disc; /* Muestra puntos de viñeta */
+}
+
+#account-area {
+  background-image: url('https://fondosmil.com/fondo/32256.jpg');
+  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el área */
+  background-position: center center; /* Centra la imagen horizontal y verticalmente */
+  padding: 50px 0;
+}
+
+.deposit {
+	background-color: slateblue;
+}
+
+.withdraw {
+	background-color: lightsalmon;
+}
+
+.balance {
+	background-color: tomato;
+}
+
+.status {
+	margin: 0 20px;
+	color: white;
+	padding: 20px;
+	border-radius: 10px;
+}

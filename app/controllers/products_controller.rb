@@ -34,8 +34,19 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @product = Product.find(params[:id])
+    @company = @product.company # Asumiendo que existe una relación entre Product y Company
+
     if @product.update(product_params)
-      redirect_to client_path(@product.client), notice: 'Product was successfully updated.'
+      if request.referer.include?('morosos')
+        redirect_to company_morosos_path(@company), notice: 'Moroso Actualizado Correctamente'
+      elsif request.referer.include?('prestamos')
+        redirect_to company_prestamos_path(@company), notice: 'Prestamo Actualizado Correctamente'
+      elsif request.referer.include?('reservas')
+        redirect_to company_reservas_path(@company), notice: 'Reserva Actualizado Correctamente'
+      else
+        redirect_to client_path(@product.client), notice: 'Product was successfully updated.'
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -49,7 +60,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:disfraz, :agregado, :valor, :garantia, :init_date, :end_date, :estado)
+    params.require(:product).permit(:disfraz, :agregado, :valor, :garantia, :init_date, :end_date, :reserva_date, :estado)
   end
 
   def set_product

@@ -38,6 +38,7 @@ class CsvImportService
       producto.garantia = row["garantia"]
       producto.init_date = row["fechaa"]
       producto.end_date = row["fechad"]
+      producto.reserva_date = row["fechareserva"]
       producto.estado = row["estado"]
 
       # Asociar el producto con el cliente

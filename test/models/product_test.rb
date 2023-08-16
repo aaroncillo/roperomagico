@@ -2,17 +2,18 @@
 #
 # Table name: products
 #
-#  id         :bigint           not null, primary key
-#  agregado   :text
-#  disfraz    :string
-#  end_date   :date
-#  estado     :string
-#  garantia   :integer
-#  init_date  :date
-#  valor      :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  client_id  :bigint           not null
+#  id           :bigint           not null, primary key
+#  agregado     :text
+#  disfraz      :string
+#  end_date     :date
+#  estado       :string
+#  garantia     :integer
+#  init_date    :date
+#  reserva_date :date
+#  valor        :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  client_id    :bigint           not null
 #
 # Indexes
 #
