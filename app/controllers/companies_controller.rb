@@ -56,6 +56,7 @@ class CompaniesController < ApplicationController
     @valor_ventas = 0
     @valor_arriendos = 0
     @valor_garantias = 0
+    @valor_entregados = 0
 
     if params[:start_date_between]
       starts, ends = params[:start_date_between].split(" - ")
@@ -71,15 +72,21 @@ class CompaniesController < ApplicationController
                                        init_date: starts_for_select..ends_for_select,
                                        estado: "ARRIENDO").sum(:valor)
 
+      @valor_entregados = Product.where(client_id: filtered.pluck(:id),
+                                      init_date: starts_for_select..ends_for_select,
+                                      estado: "ENTREGADO").sum(:valor)
+
       @valor_garantias = Product.where(client_id: filtered.pluck(:id),
       init_date: starts_for_select..ends_for_select,
       estado: ["VENTA","ARRIENDO","ENTREGADO"]).sum(:garantia)
+
+      @total = @valor_ventas + @valor_arriendos + @valor_entregados
     end
   end
 
   def morosos
     @company = Company.find(params[:company_id])
-    filtered = Product.where('end_date < ?', Date.today).where.not(estado: 'ENTREGADO')
+    filtered = Product.where('end_date < ?', Date.today).where.not(estado: ['ENTREGADO', 'VENTA'])
     @pagy, @products = pagy(filtered, items: 5)
     @morosos_by_client = @products.group_by { |p| p.client }
   end

@@ -1,4 +1,4 @@
-<div class="data-table mt-3">
+<div class="data-table mt-2">
   <%= form_with url: company_balances_path, method: :get, remote: true do |form| %>
     <div class="d-flex flex-column mt-3 align-items-center">
       <h2>Seleccionar fecha</h2>
@@ -7,30 +7,68 @@
     </div>
   <% end %>
 </div>
+<%= link_to "Volver", company_path(@company), class:"btn btn-warning" %>
+<div id="account-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-3">
+        <div class="deposit status">
+          <h5>Ventas</h5>
+          <h2>$ <span id="current-deposit"><%= number_with_delimiter(@valor_ventas, delimiter: '.') %></span></h2>
+        </div>
+      </div>
 
-<div class="grande">
+      <div class="col-lg-4 mb-3">
+        <div class="withdraw status">
+          <h5>Arriendos</h5>
+          <h2>$ <span id="current-withdraw"><%= number_with_delimiter(@valor_arriendos, delimiter: '.')  %></span></h2>
+        </div>
+      </div>
 
-  <div class="cards container mt-2">
-    <div class="card-category mt-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://c4.wallpaperflare.com/wallpaper/966/989/139/shrek-movies-animated-movies-dreamworks-hd-wallpaper-preview.jpg)">
-      <div class="d-flex flex-column text-center">
-        <h1 class="text-decoration-underline">Ventas</h1>
-        <h1 class="display-2 text-light fw-bold"><%= @valor_ventas %></h1>
+      <div class="col-lg-4 mb-3">
+        <div class="balance status">
+          <h5>Garantias</h5>
+          <h2>$ <span id="current-balance"><%= number_with_delimiter(@valor_garantias, delimiter: '.') %></span></h2>
+        </div>
       </div>
     </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-4 mb-3">
+        <div class="balance status">
+          <h5>Entregados</h5>
+          <h2>$ <span id="current-balance"><%= number_with_delimiter(@valor_entregados, delimiter: '.') %></span></h2>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <div class="card-category mt-5 " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://cdn2.tfx.company/images/clickwallpapers-CouragetheCowardlyDog-desenhos-fullhd-img1.jpg)">
-    <div class="d-flex flex-column text-center">
-      <h1 class="text-decoration-underline">Arriendos</h1>
-      <h1 class="display-2 text-light fw-bold"><%= @valor_arriendos %></h1>
-    </div>
-    </div>
-
-    <div class="card-category mt-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://fondosmil.com/fondo/32256.jpg)">
-    <div class="d-flex flex-column text-center">
-      <h1 class="text-decoration-underline">Garantias</h1>
-      <h1 class="display-2 text-light fw-bold"><%= @valor_garantias %></h1>
-    </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="submit-area ">
+          <h4>Total</h4>
+          <ul class="bullet-list">
+            <li>
+              <h2>ENTRADA ------> $ <span id="current-balance"><%= number_with_delimiter(@total, delimiter: '.') %></span></h2>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="submit-area ">
+          <h4>ENTRADAS - GASTOS</h4>
+          <ul class="bullet-list">
+            <li>
+              <h2>ENTRADA ------> $ <span id="current-balance"><%= number_with_delimiter(@total, delimiter: '.') %></span></h2>
+            </li>
+            <li>
+              <h2>GASTOS ------> $ <span id="current-balance"><%= number_with_delimiter(@total, delimiter: '.') %></span></h2>
+            </li>
+            <hr style="border-top: 3px solid #ccc;">
+              <h2>GASTOS ------> $ <span id="current-balance"><%= number_with_delimiter(@total, delimiter: '.') %></span></h2>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<%= link_to "Volver", company_path(@company), class:"btn btn-warning mt-2" %>
