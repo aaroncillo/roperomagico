@@ -78,18 +78,20 @@ class CompaniesController < ApplicationController
   end
 
   def morosos
-    @products = Product.where('end_date < ?', Date.today).where.not(estado: 'ENTREGADO')
+    @company = Company.find(params[:company_id])
+    filtered = Product.where('end_date < ?', Date.today).where.not(estado: 'ENTREGADO')
+    @pagy, @products = pagy(filtered, items: 5)
     @morosos_by_client = @products.group_by { |p| p.client }
   end
 
   def prestamos
-    console
+    @company = Company.find(params[:company_id])
     filtered = Product.where(estado: 'PRESTAMO').order(id: :asc)
     @pagy, @products = pagy(filtered.all, items: 5)
   end
 
   def reservas
-    console
+    @company = Company.find(params[:company_id])
     filtered = Product.where(estado: 'RESERVA').order(id: :asc)
     @pagy, @products = pagy(filtered.all, items: 5)
   end

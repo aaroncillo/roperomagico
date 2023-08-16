@@ -37,13 +37,13 @@
       <%= render "import/import_form" %>
     </div>
     <div>
-      <button class="btn btn-info" onclick="window.location.href='<%= morosos_path %>'">
+      <button class="btn btn-info" onclick="window.location.href='<%= company_morosos_path(@company) %>'">
         Morosos
       </button>
-      <button class="btn btn-info" onclick="window.location.href='<%= prestamos_path %>'">
+      <button class="btn btn-info" onclick="window.location.href='<%= company_prestamos_path(@company) %>'">
         Prestamos
       </button>
-      <button class="btn btn-info" onclick="window.location.href='<%= reservas_path %>'">
+      <button class="btn btn-info" onclick="window.location.href='<%= company_reservas_path(@company) %>'">
         Reservas
       </button>
     </div>

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :companies, only: [:index, :new, :create] do
     get 'balances', to: 'companies#balances'
+    get 'morosos', to: 'companies#morosos'
+    get 'prestamos', to: 'companies#prestamos'
+    get 'reservas', to: 'companies#reservas'
+
     resources :clients, only: [:index, :new, :create]
   end
   resources :clients, except: [:index, :new, :create] do
@@ -23,8 +27,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'morosos', to: 'companies#morosos'
-  get 'prestamos', to: 'companies#prestamos'
-  get 'reservas', to: 'companies#reservas'
 
 end

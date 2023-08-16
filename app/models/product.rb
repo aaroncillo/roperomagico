@@ -25,7 +25,7 @@
 class Product < ApplicationRecord
   ESTADO = %w(ARRIENDO ENTREGADO VENTA PRESTAMO RESERVA)
   belongs_to :client
-
+  has_one :company, through: :client
   #Validaciones
 
 end

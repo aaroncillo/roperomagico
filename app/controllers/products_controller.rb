@@ -34,9 +34,16 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @product = Product.find(params[:id])
+    @company = @product.company # Asumiendo que existe una relación entre Product y Company
+
     if @product.update(product_params)
       if request.referer.include?('morosos')
-        redirect_to morosos_path, notice: 'Product was successfully updated from morosos.'
+        redirect_to company_morosos_path(@company), notice: 'Moroso Actualizado Correctamente'
+      elsif request.referer.include?('prestamos')
+        redirect_to company_prestamos_path(@company), notice: 'Prestamo Actualizado Correctamente'
+      elsif request.referer.include?('reservas')
+        redirect_to company_reservas_path(@company), notice: 'Reserva Actualizado Correctamente'
       else
         redirect_to client_path(@product.client), notice: 'Product was successfully updated.'
       end
