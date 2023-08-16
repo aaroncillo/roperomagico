@@ -18,6 +18,7 @@ class CsvImportService
       client = Client.new
       client.name = row["cliente"]
       client.address = row["direccion"]
+      client.rut = row["rut"]
       client.phone = row["celular"]
       client.company = @company
       client.save!
@@ -37,6 +38,7 @@ class CsvImportService
       product.garantia = row["garantia"]
       product.init_date = row["fechaa"]
       product.end_date = row["fechad"]
+      product.reserva_date = row["fechareserva"]
       product.estado = row["estado"]
 
       # Associate the product with the client

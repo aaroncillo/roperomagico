@@ -60,7 +60,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:disfraz, :agregado, :valor, :garantia, :init_date, :end_date, :estado)
+    params.require(:product).permit(:disfraz, :agregado, :valor, :garantia, :init_date, :end_date, :reserva_date, :estado)
   end
 
   def set_product
