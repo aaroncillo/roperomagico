@@ -28,7 +28,8 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @client = Client.new
 
-    filtered = Client.where(company_id: @company.id)
+
+    filtered = Client.where(company_id: @company.id).order(id: :asc)
 
     if params[:filter].present?
       filtered = filtered.where("name ILIKE ?", "%#{params[:filter]}%")
@@ -55,6 +56,7 @@ class CompaniesController < ApplicationController
     @valor_ventas = 0
     @valor_arriendos = 0
     @valor_garantias = 0
+    @valor_entregados = 0
 
     if params[:start_date_between]
       starts, ends = params[:start_date_between].split(" - ")
@@ -70,10 +72,35 @@ class CompaniesController < ApplicationController
                                        init_date: starts_for_select..ends_for_select,
                                        estado: "ARRIENDO").sum(:valor)
 
+      @valor_entregados = Product.where(client_id: filtered.pluck(:id),
+                                      init_date: starts_for_select..ends_for_select,
+                                      estado: "ENTREGADO").sum(:valor)
+
       @valor_garantias = Product.where(client_id: filtered.pluck(:id),
       init_date: starts_for_select..ends_for_select,
       estado: ["VENTA","ARRIENDO","ENTREGADO"]).sum(:garantia)
+
+      @total = @valor_ventas + @valor_arriendos + @valor_entregados
     end
+  end
+
+  def morosos
+    @company = Company.find(params[:company_id])
+    filtered = Product.where('end_date < ?', Date.today).where.not(estado: ['ENTREGADO', 'VENTA'])
+    @pagy, @products = pagy(filtered, items: 5)
+    @morosos_by_client = @products.group_by { |p| p.client }
+  end
+
+  def prestamos
+    @company = Company.find(params[:company_id])
+    filtered = Product.where(estado: 'PRESTAMO').order(id: :asc)
+    @pagy, @products = pagy(filtered.all, items: 5)
+  end
+
+  def reservas
+    @company = Company.find(params[:company_id])
+    filtered = Product.where(estado: 'RESERVA').order(id: :asc)
+    @pagy, @products = pagy(filtered.all, items: 5)
   end
 
   def edit

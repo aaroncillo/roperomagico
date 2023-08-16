@@ -1,5 +1,4 @@
 class CsvImportService
-
   require 'csv'
 
   def initialize(file, user)
@@ -11,39 +10,42 @@ class CsvImportService
 
   def import
     @count = 0
+    clientes_existentes = {} # Mantener un seguimiento de los clientes existentes
+
     CSV.foreach(@file.path, headers: true) do |row|
+      nombre_cliente = row["cliente"]
 
-      # C
-      # create a new client
-      client = Client.new
-      client.name = row["cliente"]
-      client.address = row["direccion"]
-      client.phone = row["celular"]
-      client.company = @company
-      client.save!
+      # Verificar si el cliente ya existe
+      if clientes_existentes.key?(nombre_cliente)
+        cliente = clientes_existentes[nombre_cliente]
+      else
+        # Crear un nuevo cliente si no existe
+        cliente = Client.new
+        cliente.name = nombre_cliente
+        cliente.address = row["direccion"]
+        cliente.phone = row["celular"]
+        cliente.company = @company
+        cliente.save!
 
-      # @count += 1
+        clientes_existentes[nombre_cliente] = cliente
+      end
 
-      client_name = row["cliente"]
+      # Crear un nuevo producto
+      producto = Product.new
+      producto.disfraz = row["disfraz"]
+      producto.agregado = row["agregado"]
+      producto.valor = row["valor"]
+      producto.garantia = row["garantia"]
+      producto.init_date = row["fechaa"]
+      producto.end_date = row["fechad"]
+      producto.reserva_date = row["fechareserva"]
+      producto.estado = row["estado"]
 
-      # Find the client by name
-      client = Client.find_by(name: client_name)
+      # Asociar el producto con el cliente
+      producto.client = cliente
 
-      # Create a new product
-      product = Product.new
-      product.disfraz = row["disfraz"]
-      product.agregado = row["agregado"]
-      product.valor = row["valor"]
-      product.garantia = row["garantia"]
-      product.init_date = row["fechaa"]
-      product.end_date = row["fechad"]
-      product.estado = row["estado"]
-
-      # Associate the product with the client
-      product.client = client
-
-      # Save the product
-      product.save!
+      # Guardar el producto
+      producto.save!
 
       @count += 1
     end
@@ -52,5 +54,4 @@ class CsvImportService
   def number_imported_with_last_run
     @count
   end
-
 end

@@ -1,0 +1,46 @@
+<%= turbo_frame_tag "modal" %>
+
+<div class="container mt-5">
+  <div class="d-flex justify-content-between">
+    <%= link_to "Volver", company_path(@company), class:"btn btn-warning mt-2" %>
+  </div>
+
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Cliente</th>
+        <th scope="col">Disfraz</th>
+        <th scope="col">Agregado</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Garantía</th>
+        <th scope="col">Fecha de inicio</th>
+        <th scope="col">Fecha de fin</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |p| %>
+        <tr>
+          <td><%= p.client.name %></td>
+          <td><%= p.disfraz %></td>
+          <td><%= p.agregado %></td>
+          <td><%= p.valor %></td>
+          <td><%= p.garantia %></td>
+          <td><%= p.init_date %></td>
+          <td><%= p.end_date %></td>
+          <td><%= p.estado %></td>
+          <td class="text-center">
+            <%= link_to product_path(p), class:"btn btn-danger", data:{turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+            <%= link_to edit_product_path(p), class:"btn btn-primary", data: { turbo_frame: 'modal' } do %>
+              <i class="fa-solid fa-pen-to-square"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
+</div>
