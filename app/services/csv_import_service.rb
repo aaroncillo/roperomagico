@@ -13,7 +13,7 @@ class CsvImportService
     clientes_existentes = {} # Mantener un seguimiento de los clientes existentes
 
     CSV.foreach(@file.path, headers: true) do |row|
-      nombre_cliente = row["id"]
+      nombre_cliente = row["cliente"]
 
       # Verificar si el cliente ya existe
       if clientes_existentes.key?(nombre_cliente)
@@ -21,7 +21,7 @@ class CsvImportService
       else
         # Crear un nuevo cliente si no existe
         cliente = Client.new
-        cliente.name = row["cliente"]
+        cliente.name = nombre_cliente
         cliente.address = row["direccion"]
         cliente.phone = row["celular"]
         cliente.company = @company
@@ -38,6 +38,7 @@ class CsvImportService
       producto.garantia = row["garantia"]
       producto.init_date = row["fechaa"]
       producto.end_date = row["fechad"]
+      producto.reserva_date = row["fechareserva"]
       producto.estado = row["estado"]
 
       # Asociar el producto con el cliente
