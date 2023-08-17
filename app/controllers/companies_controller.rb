@@ -74,7 +74,7 @@ class CompaniesController < ApplicationController
 
       @valor_garantias = Product.where(client_id: filtered.pluck(:id),
       init_date: starts_for_select..ends_for_select,
-      estado: ["VENTA","ARRIENDO","ENTREGADO"]).sum(:garantia)
+      estado: ["ARRIENDO","RESERVA"]).sum(:garantia)
 
       @total = @valor_ventas + @valor_arriendos + @valor_entregados
     end
