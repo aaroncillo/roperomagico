@@ -29,7 +29,8 @@ class ClientsController < ApplicationController
   def show
     @client = Client.find(params[:id])
     @product = Product.new
-    @products = Product.where(client_id: @client.id)
+    filtered = Product.where(client_id: @client.id).order(init_date: :desc)
+    @pagy, @products = pagy(filtered.all, items: 8)
   end
 
   def export_all_csv
