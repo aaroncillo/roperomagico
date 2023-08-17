@@ -30,7 +30,7 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
     @product = Product.new
     filtered = Product.where(client_id: @client.id).order(init_date: :desc)
-    @pagy, @products = pagy(filtered.all, items: 8)
+    @pagy, @products = pagy(filtered.all, items: 6)
   end
 
   def export_all_csv
