@@ -93,3 +93,9 @@ gem 'csv'
 gem "view_component", "~> 3.5"
 
 gem "pagy", "~> 6.0"
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
+
+gem "sentry-ruby", "~> 5.10"
+
+gem "sentry-rails", "~> 5.10"
