@@ -1,0 +1,4 @@
+<%= link_to "Volver", company_path(params[:company_id]), class:"btn btn-warning mt-2" %>
+<%= turbo_frame_tag "pagos" do %>
+  <%= render "pago", pago: @pago %>
+<% end %>

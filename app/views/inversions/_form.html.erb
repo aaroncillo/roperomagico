@@ -1,0 +1,22 @@
+<h1>Nuevo Cliente</h1>
+<% if @editing %>
+  <div class="text-center">
+    <%= simple_form_for [@company, @inversion] do |f| %>
+      <%= f.input :name_inversion, autofocus: true  %>
+      <%= f.input :description_inversion  %>
+      <%= f.input :precio_inversion  %>
+      <%= f.input :fecha_inversion  %>
+      <%= f.submit class: "btn btn-success", data:{turbo_method: :update, turbo_confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center">
+    <%= simple_form_for [@company, @inversions] do |f| %>
+      <%= f.input :name_inversion, autofocus: true  %>
+      <%= f.input :description_inversion  %>
+      <%= f.input :precio_inversion  %>
+      <%= f.input :fecha_inversion  %>
+      <%= f.submit class: "btn btn-success" %>
+    <% end %>
+  </div>
+<% end %>

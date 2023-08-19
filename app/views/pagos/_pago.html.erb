@@ -1,0 +1,35 @@
+<div class="container">
+  <h1 class="display-1 text-center">PAGOS</h1>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nombre Pago</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Accion</th>
+      </tr>
+      <%= turbo_frame_tag "modal" %>
+      <%= link_to "Nuevo Pago", new_company_pago_path, class:"btn btn-primary mb-2", data: { turbo_frame: 'modal' } %>
+    </thead>
+    <tbody>
+      <% @pagos.each do |p| %>
+        <tr>
+          <td><%= p.name_gasto %></td>
+          <td><%= p.description_gasto %></td>
+          <td><%= p.precio_gasto %></td>
+          <td><%= p.fecha_gasto %></td>
+          <td class="text-center">
+            <%= link_to pago_path(p), class:"btn btn-danger", data:{turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+            <%= link_to edit_pago_path(p), class:"btn btn-primary", data: { turbo_frame: 'modal' } do %>
+              <i class="fa-solid fa-pen-to-square"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%= pagy_bootstrap_nav(@pagy).html_safe %>
+</div>

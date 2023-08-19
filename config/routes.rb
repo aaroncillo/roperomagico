@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     get 'morosos', to: 'companies#morosos'
     get 'prestamos', to: 'companies#prestamos'
     get 'reservas', to: 'companies#reservas'
+    resources :pagos, only: [:index, :new, :create]
+    resources :inversions, only: [:index, :new, :create]
 
     resources :clients, only: [:index, :new, :create]
   end
@@ -20,6 +22,8 @@ Rails.application.routes.draw do
   end
   resources :companies, except: [:index, :new, :create]
   resources :products, except: [:index, :new, :create]
+  resources :pagos, except: [:index, :new, :create]
+  resources :inversions, except: [:index, :new, :create]
 
   resources :import do
     collection do
