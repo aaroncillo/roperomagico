@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :companies, only: [:index, :new, :create] do
     get 'balances', to: 'companies#balances'
+    get 'graficos', to: 'companies#graficos'
     get 'morosos', to: 'companies#morosos'
     get 'prestamos', to: 'companies#prestamos'
     get 'reservas', to: 'companies#reservas'
