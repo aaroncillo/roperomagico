@@ -51,13 +51,16 @@
           <h4>ENTRADAS - GASTOS</h4>
           <ul class="bullet-list">
             <li>
-              <h2>ENTRADA ------> $ <span id="current-balance"><%= number_with_delimiter(@total, delimiter: '.') %></span></h2>
+              <h2>ENTRADA ------> $ <span id="current-balance"><%= number_with_delimiter(@total_entrada, delimiter: '.') %></span></h2>
             </li>
             <li>
-              <h2>GASTOS ------> $ <span id="current-balance"><%= number_with_delimiter(@total, delimiter: '.') %></span></h2>
+              <h2>PAGOS ------> $ <span id="current-balance"><%= number_with_delimiter(@valor_pagos, delimiter: '.') %></span></h2>
+            </li>
+            <li>
+              <h2>INVERSIÓN ------> $ <span id="current-balance"><%= number_with_delimiter(@valor_inversion, delimiter: '.') %></span></h2>
             </li>
             <hr style="border-top: 3px solid #ccc;">
-              <h2>GASTOS ------> $ <span id="current-balance"><%= number_with_delimiter(@total, delimiter: '.') %></span></h2>
+              <h2>GANANCIA ------> $ <span id="current-balance"><%= number_with_delimiter(@calculo, delimiter: '.') %></span></h2>
           </ul>
         </div>
       </div>

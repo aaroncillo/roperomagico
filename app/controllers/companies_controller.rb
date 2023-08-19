@@ -29,7 +29,7 @@ class CompaniesController < ApplicationController
     @client = Client.new
 
 
-    filtered = Client.where(company_id: @company.id).order(id: :asc)
+    filtered = Client.where(company_id: @company.id).order(id: :desc)
 
     if params[:filter].present?
       filtered = filtered.where("name ILIKE ?", "%#{params[:filter]}%")
@@ -53,10 +53,18 @@ class CompaniesController < ApplicationController
 
     # DatePicker
 
+    # VALORES DE PRODUCTOS
     @valor_ventas = 0
     @valor_arriendos = 0
     @valor_garantias = 0
     @valor_entregados = 0
+    @total_entrada = 0
+
+    # VALORES DE PAGOS E INVERSION
+
+    @valor_pagos = 0
+    @valor_inversion = 0
+    @calculo = 0
 
     if params[:start_date_between]
       starts, ends = params[:start_date_between].split(" - ")
@@ -76,7 +84,15 @@ class CompaniesController < ApplicationController
       init_date: starts_for_select..ends_for_select,
       estado: ["ARRIENDO","RESERVA"]).sum(:garantia)
 
-      @total = @valor_ventas + @valor_arriendos + @valor_entregados
+      @valor_pagos = Pago.where(company_id: @company.id,
+      fecha_gasto: starts_for_select..ends_for_select).sum(:precio_gasto)
+
+      @valor_inversion = Inversion.where(company_id: @company.id,
+      fecha_inversion: starts_for_select..ends_for_select).sum(:precio_inversion)
+
+      @total_entrada = @valor_ventas + @valor_arriendos + @valor_entregados
+
+      @calculo = @total_entrada - @valor_pagos - @valor_inversion
     end
   end
 

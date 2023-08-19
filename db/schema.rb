@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_020059) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_19_202824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,38 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_020059) do
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
+  create_table "gastos", force: :cascade do |t|
+    t.string "name_gastos"
+    t.text "description_gastos"
+    t.integer "precio_gastos"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_gastos_on_company_id"
+  end
+
+  create_table "inversions", force: :cascade do |t|
+    t.string "name_inversion"
+    t.text "description_inversion"
+    t.integer "precio_inversion"
+    t.date "fecha_inversion"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_inversions_on_company_id"
+  end
+
+  create_table "pagos", force: :cascade do |t|
+    t.string "name_gasto"
+    t.text "description_gasto"
+    t.integer "precio_gasto"
+    t.date "fecha_gasto"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_pagos_on_company_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "disfraz"
     t.text "agregado"
@@ -92,5 +124,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_020059) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clients", "companies"
   add_foreign_key "companies", "users"
+  add_foreign_key "gastos", "companies"
+  add_foreign_key "inversions", "companies"
+  add_foreign_key "pagos", "companies"
   add_foreign_key "products", "clients"
 end
