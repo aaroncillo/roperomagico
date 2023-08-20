@@ -202,6 +202,11 @@ class CompaniesController < ApplicationController
         "Sueldos" => @valor_pagos
       }
 
+      @pie_chart_versus = {
+        "Arriendos" => @valor_arriendos,
+        "Ventas" => @valor_ventas
+      }
+
       @starts_for_select = starts_for_select
       @ends_for_select = ends_for_select
 
