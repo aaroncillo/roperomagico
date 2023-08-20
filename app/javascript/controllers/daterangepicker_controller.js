@@ -7,11 +7,16 @@ export default class extends Controller {
       alwaysShowCalendars: true,
       autoApply: true,
       ranges: {
-          'Today': [moment().startOf('day'), moment().endOf('day')],
-          'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
-          'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
-          'This Month': [moment().startOf('month').startOf('day'), moment().endOf('month').endOf('day')],
-          'All time': [moment('2010-11-15'), moment()],
+          'Hoy': [moment().startOf('day'), moment().endOf('day')],
+          'Ayer': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+          'Ultimos 7 dias': [moment().subtract(6, 'days').startOf('day'), moment().endOf('day')],
+          'Este mes': [moment().startOf('month').startOf('day'), moment().endOf('month').endOf('day')],
+          'Este año': [moment().startOf('year').startOf('day'), moment().endOf('day')],
+          'Año anterior': [
+            moment().subtract(1, 'year').startOf('year').startOf('day'),
+            moment().subtract(1, 'year').endOf('year').endOf('day')
+          ],
+          'All time': [moment('2018-01-01'), moment()],
       },
     })
   }

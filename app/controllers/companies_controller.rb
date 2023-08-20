@@ -120,6 +120,7 @@ class CompaniesController < ApplicationController
     @valor_inversion = 0
     @calculo = 0
 
+
     if params[:start_date_between]
       starts, ends = params[:start_date_between].split(" - ")
       starts_for_select = Date.strptime(starts, "%m/%d/%Y")
@@ -147,6 +148,69 @@ class CompaniesController < ApplicationController
       @total_entrada = @valor_ventas + @valor_arriendos + @valor_entregados
 
       @calculo = @total_entrada - @valor_pagos - @valor_inversion
+
+      @ingresos_per_mes = Company.joins(:products).where(products: { init_date: starts_for_select..ends_for_select, estado: ["ARRIENDO", "ENTREGADO", "VENTA"] }).group_by_month(:init_date).sum(:valor)
+      @pagos_per_mes = Company.joins(:pagos).where(pagos: { fecha_gasto: starts_for_select..ends_for_select }).group_by_month(:fecha_gasto).sum(:precio_gasto)
+      @inversion_per_mes = Company.joins(:inversions).where(inversions: { fecha_inversion: starts_for_select..ends_for_select }).group_by_month(:fecha_inversion).sum(:precio_inversion)
+
+      @diferencia_por_mes = {}
+
+      @ingresos_per_mes.each do |month, ingresos|
+      pagos = @pagos_per_mes[month] || 0
+      inversiones = @inversion_per_mes[month] || 0
+      @diferencia_por_mes[month] = ingresos - pagos - inversiones
+      end
+
+      @ingresos_by_day = Company.joins(:products).where(products: { init_date: starts_for_select..ends_for_select, estado: ["ARRIENDO", "ENTREGADO", "VENTA"] }).group_by_day(:init_date, format: "%a").sum(:valor)
+      @pagos_by_day = Company.joins(:pagos).where(pagos: { fecha_gasto: starts_for_select..ends_for_select }).group_by_day(:fecha_gasto, format: "%a").sum(:precio_gasto)
+      @inversion_by_day = Company.joins(:inversions).where(inversions: { fecha_inversion: starts_for_select..ends_for_select }).group_by_day(:fecha_inversion, format: "%a").sum(:precio_inversion)
+
+      @diferencia_by_day = {}
+
+      @ingresos_by_day.each do |day, ingresos|
+      pagos = @pagos_by_day[day] || 0
+      inversiones = @inversion_by_day[day] || 0
+      @diferencia_by_day[day] = ingresos - pagos - inversiones
+      end
+
+      @ingresos_by_day2 = Company.joins(:products)
+        .where(products: { init_date: starts_for_select..ends_for_select, estado: ["ARRIENDO", "ENTREGADO", "VENTA"] })
+        .group(:init_date)  # Esto agrupa por día sin formato de día de la semana
+        .sum(:valor)
+
+      @pagos_by_day2 = Company.joins(:pagos)
+        .where(pagos: { fecha_gasto: starts_for_select..ends_for_select })
+        .group(:fecha_gasto)  # Esto agrupa por día sin formato de día de la semana
+        .sum(:precio_gasto)
+
+      @inversion_by_day2 = Company.joins(:inversions)
+        .where(inversions: { fecha_inversion: starts_for_select..ends_for_select })
+        .group(:fecha_inversion)  # Esto agrupa por día sin formato de día de la semana
+        .sum(:precio_inversion)
+
+      @diferencia_by_day2 = {}
+
+      @ingresos_by_day2.each do |day2, ingresos2|
+        pagos2 = @pagos_by_day2[day2] || 0
+        inversiones2 = @inversion_by_day2[day2] || 0
+        @diferencia_by_day2[day2] = ingresos2 - pagos2 - inversiones2
+      end
+
+      @pie_chart_data = {
+        "Ingresos" => @total_entrada,
+        "Ganancias" => @calculo,
+        "Sueldos" => @valor_pagos
+      }
+
+      @starts_for_select = starts_for_select
+      @ends_for_select = ends_for_select
+
+
+      @data_by_day = Company.joins(:products)
+      .where(products: { init_date: starts_for_select..ends_for_select })
+      .group_by_day_of_week(:init_date, format: "%a")
+      .sum("valor")
+
     end
   end
 
