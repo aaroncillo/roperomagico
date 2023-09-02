@@ -1,3 +1,4 @@
+<%= turbo_frame_tag "modal" %>
 <div class="data-table mt-2">
   <%= form_with url: company_balances_path, method: :get, remote: true do |form| %>
     <div class="d-flex flex-column mt-3 align-items-center">
@@ -56,4 +57,48 @@
       </div>
     </div>
   </div>
+</div>
+<div>
+<!-- (tu código del buscador de fechas aquí) -->
+
+<!-- (tu código de balance aquí) -->
+
+<!-- La tabla de productos y clientes: -->
+<h1 class="display-1 text-center">Productos y Clientes</h1>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Cliente</th>
+      <th scope="col">Disfraz</th>
+      <th scope="col">Agregado</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Garantía</th>
+      <th scope="col">Fecha de inicio</th>
+      <th scope="col">Fecha de fin</th>
+      <th scope="col">Fecha de reserva</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.client.name %></td>
+        <td><%= product.disfraz %></td>
+        <td><%= product.agregado %></td>
+        <td><%= product.valor %></td>
+        <td><%= product.garantia %></td>
+        <td><%= product.init_date %></td>
+        <td><%= product.end_date %></td>
+        <td><%= product.reserva_date %></td>
+        <td><%= product.estado %></td>
+        <td class="text-center">
+          <%= link_to edit_product_path(product), class:"btn btn-primary", data: { turbo_frame: 'modal' } do %>
+            <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 </div>

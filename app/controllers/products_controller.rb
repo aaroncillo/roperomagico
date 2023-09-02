@@ -44,6 +44,8 @@ class ProductsController < ApplicationController
         redirect_to company_prestamos_path(@company), notice: 'Prestamo Actualizado Correctamente'
       elsif request.referer.include?('reservas')
         redirect_to company_reservas_path(@company), notice: 'Reserva Actualizado Correctamente'
+      elsif request.referer.include?('balances')
+        redirect_to company_balances_path(@company), notice: 'Cliente en Balance Actualizado Correctamente'
       else
         redirect_to client_path(@product.client), notice: 'Product was successfully updated.'
       end

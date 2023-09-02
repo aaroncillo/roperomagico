@@ -69,6 +69,7 @@ class CompaniesController < ApplicationController
     @valor_pagos = 0
     @valor_inversion = 0
     @calculo = 0
+    @products = []
 
     if params[:start_date_between]
       starts, ends = params[:start_date_between].split(" - ")
@@ -97,7 +98,10 @@ class CompaniesController < ApplicationController
       @total_entrada = @valor_ventas + @valor_arriendos + @valor_entregados
 
       @calculo = @total_entrada - @valor_pagos - @valor_inversion
+      @clients = Client.where(company_id: @company.id)
+      @products = Product.includes(:client).where(client: @clients, init_date: starts_for_select..ends_for_select)
     end
+
   end
 
   def graficos
