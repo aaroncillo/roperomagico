@@ -88,9 +88,9 @@
         <td><%= product.agregado %></td>
         <td><%= product.valor %></td>
         <td><%= product.garantia %></td>
-        <td><%= product.init_date %></td>
-        <td><%= product.end_date %></td>
-        <td><%= product.reserva_date %></td>
+        <td class="fechas-column"><%= product.init_date %></td>
+        <td class="fechas-column"><%= product.end_date %></td>
+        <td class="fechas-column"><%= product.reserva_date %></td>
         <td><%= product.estado %></td>
         <td class="text-center">
           <%= link_to edit_product_path(product), class:"btn btn-primary", data: { turbo_frame: 'modal' } do %>
