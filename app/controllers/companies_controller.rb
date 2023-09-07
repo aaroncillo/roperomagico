@@ -89,11 +89,13 @@ class CompaniesController < ApplicationController
       init_date: starts_for_select..ends_for_select,
       estado: ["ARRIENDO","RESERVA"]).sum(:garantia)
 
-      @valor_pagos = Pago.where(company_id: @company.id,
-      fecha_gasto: starts_for_select..ends_for_select).sum(:precio_gasto)
+      @valor_pagos = Product.where(client_id: filtered.pluck(:id),
+                                  init_date: starts_for_select..ends_for_select,
+                                  estado: ["PAGO"]).sum(:valor)
 
-      @valor_inversion = Inversion.where(company_id: @company.id,
-      fecha_inversion: starts_for_select..ends_for_select).sum(:precio_inversion)
+      @valor_inversion = Product.where(client_id: filtered.pluck(:id),
+                                  init_date: starts_for_select..ends_for_select,
+                                  estado: ["INVERSION"]).sum(:valor)
 
       @total_entrada = @valor_ventas + @valor_arriendos + @valor_entregados
 
@@ -143,19 +145,21 @@ class CompaniesController < ApplicationController
       init_date: starts_for_select..ends_for_select,
       estado: ["ARRIENDO","RESERVA"]).sum(:garantia)
 
-      @valor_pagos = Pago.where(company_id: @company.id,
-      fecha_gasto: starts_for_select..ends_for_select).sum(:precio_gasto)
+      @valor_pagos = Product.where(client_id: filtered.pluck(:id),
+                                  init_date: starts_for_select..ends_for_select,
+                                  estado: ["PAGO"]).sum(:valor)
 
-      @valor_inversion = Inversion.where(company_id: @company.id,
-      fecha_inversion: starts_for_select..ends_for_select).sum(:precio_inversion)
+      @valor_inversion = Product.where(client_id: filtered.pluck(:id),
+                                  init_date: starts_for_select..ends_for_select,
+                                  estado: ["INVERSION"]).sum(:valor)
 
       @total_entrada = @valor_ventas + @valor_arriendos + @valor_entregados
 
       @calculo = @total_entrada - @valor_pagos - @valor_inversion
 
       @ingresos_per_mes = Company.joins(:products).where(products: { init_date: starts_for_select..ends_for_select, estado: ["ARRIENDO", "ENTREGADO", "VENTA", "RESERVA"] }).group_by_month(:init_date).sum(:valor)
-      @pagos_per_mes = Company.joins(:pagos).where(pagos: { fecha_gasto: starts_for_select..ends_for_select }).group_by_month(:fecha_gasto).sum(:precio_gasto)
-      @inversion_per_mes = Company.joins(:inversions).where(inversions: { fecha_inversion: starts_for_select..ends_for_select }).group_by_month(:fecha_inversion).sum(:precio_inversion)
+      @pagos_per_mes = Company.joins(:products).where(products: { init_date: starts_for_select..ends_for_select, estado: ["PAGO"] }).group_by_month(:init_date).sum(:valor)
+      @inversion_per_mes = Company.joins(:products).where(products: { init_date: starts_for_select..ends_for_select, estado: ["INVERSION"] }).group_by_month(:init_date).sum(:valor)
 
       @diferencia_por_mes = {}
 
@@ -166,8 +170,8 @@ class CompaniesController < ApplicationController
       end
 
       @ingresos_by_day = Company.joins(:products).where(products: { init_date: starts_for_select..ends_for_select, estado: ["ARRIENDO", "ENTREGADO", "VENTA", "RESERVA"] }).group_by_day(:init_date, format: "%a").sum(:valor)
-      @pagos_by_day = Company.joins(:pagos).where(pagos: { fecha_gasto: starts_for_select..ends_for_select }).group_by_day(:fecha_gasto, format: "%a").sum(:precio_gasto)
-      @inversion_by_day = Company.joins(:inversions).where(inversions: { fecha_inversion: starts_for_select..ends_for_select }).group_by_day(:fecha_inversion, format: "%a").sum(:precio_inversion)
+      @pagos_by_day = Company.joins(:products).where(products: { init_date: starts_for_select..ends_for_select, estado: ["PAGO"] }).group_by_day(:init_date, format: "%a").sum(:valor)
+      @inversion_by_day = Company.joins(:products).where(products: { init_date: starts_for_select..ends_for_select, estado: ["INVERSION"] }).group_by_day(:init_date, format: "%a").sum(:valor)
 
       @diferencia_by_day = {}
 
@@ -182,15 +186,15 @@ class CompaniesController < ApplicationController
         .group(:init_date)  # Esto agrupa por día sin formato de día de la semana
         .sum(:valor)
 
-      @pagos_by_day2 = Company.joins(:pagos)
-        .where(pagos: { fecha_gasto: starts_for_select..ends_for_select })
-        .group(:fecha_gasto)  # Esto agrupa por día sin formato de día de la semana
-        .sum(:precio_gasto)
+      @pagos_by_day2 = Company.joins(:products)
+        .where(products: { init_date: starts_for_select..ends_for_select, estado: ["PAGO"] })
+        .group(:init_date)  # Esto agrupa por día sin formato de día de la semana
+        .sum(:valor)
 
-      @inversion_by_day2 = Company.joins(:inversions)
-        .where(inversions: { fecha_inversion: starts_for_select..ends_for_select })
-        .group(:fecha_inversion)  # Esto agrupa por día sin formato de día de la semana
-        .sum(:precio_inversion)
+      @inversion_by_day2 = Company.joins(:products)
+        .where(products: { init_date: starts_for_select..ends_for_select, estado: ["INVERSION"] })
+        .group(:init_date)  # Esto agrupa por día sin formato de día de la semana
+        .sum(:valor)
 
       @diferencia_by_day2 = {}
 
