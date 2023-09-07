@@ -13,6 +13,7 @@
         <th scope="col">Garantía</th>
         <th scope="col">Fecha de inicio</th>
         <th scope="col">Fecha de fin</th>
+        <th scope="col">Fecha de reserva</th>
         <th scope="col">Estado</th>
         <th scope="col">Accion</th>
       </tr>
@@ -27,6 +28,7 @@
           <td><%= p.garantia %></td>
           <td><%= p.init_date %></td>
           <td><%= p.end_date %></td>
+          <td><%= p.reserva_date %></td>
           <td><%= p.estado %></td>
           <td class="text-center">
             <%= link_to product_path(p), class:"btn btn-danger", data:{turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
