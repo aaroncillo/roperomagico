@@ -24,9 +24,9 @@
         <td><%= p.agregado %></td>
         <td><%= p.valor %></td>
         <td><%= p.garantia %></td>
-        <td><%= p.init_date %></td>
-        <td><%= p.end_date %></td>
-        <td><%= p.reserva_date %></td>
+        <td class="fechas-column"><%= p.init_date %></td>
+        <td class="fechas-column"><%= p.end_date %></td>
+        <td class="fechas-column"><%= p.reserva_date %></td>
         <td><%= p.estado %></td>
         <td class="text-center">
           <%= link_to product_path(p), class:"btn btn-danger", data:{turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
