@@ -1,1 +1,2 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+
+Aplicacion WEB para gestionar una tienda de disfraces, permitiendo ingresar CLIENTES, DISFRACES ARRENDADOS, por fecha, descripción, arriendo, garantía, registra los morosos, los prestamos, etc etc
