@@ -249,6 +249,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.6-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     tailwindcss-rails (2.0.30-x86_64-linux)
@@ -317,6 +318,7 @@ DEPENDENCIES
   sentry-ruby (~> 5.10)
   simple_form!
   sprockets-rails
+  sqlite3
   stimulus-rails
   tailwindcss-rails (~> 2.0)
   turbo-rails

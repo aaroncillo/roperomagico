@@ -2,14 +2,14 @@
 #
 # Table name: clients
 #
-#  id         :bigint           not null, primary key
+#  id         :integer          not null, primary key
 #  address    :text
 #  name       :string
 #  phone      :string
 #  rut        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  company_id :bigint           not null
+#  company_id :integer          not null
 #
 # Indexes
 #
@@ -17,7 +17,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (company_id => companies.id)
+#  company_id  (company_id => companies.id)
 #
 class Client < ApplicationRecord
   belongs_to :company
